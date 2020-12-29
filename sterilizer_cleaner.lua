@@ -254,7 +254,7 @@ if (laboratory.have_paleotest) then
                                "hades_laboratory:water_filter");
   
   sterilizer.register_recipe("hades_laboratory:biomaterial_filter_dirty",
-                               "hades_laboratory:biomaterial_filter");
+                               "hades_laboratory:biomaterial_filter_sterilized");
   
   sterilizer.register_recipe("hades_core:coal_lump",
                                "hades_laboratory:sterilized_coal_lump");

@@ -8,7 +8,8 @@ laboratory.have_animals = minetest.get_modpath("hades_animals")~=nil;
 laboratory.have_petz = minetest.get_modpath("hades_petz")~=nil;
 laboratory.have_villages = minetest.get_modpath("hades_villages")~=nil;
 laboratory.have_skeleton = minetest.get_modpath("hades_skeleton")~=nil;
-laboratory.have_archeology = minetest.get_modpath("hades_archeology")~=nil;
+
+laboratory.have_extraores = minetest.get_modpath("hades_extraores")~=nil;
 
 
 if (laboratory.have_paleotest) then
@@ -31,10 +32,14 @@ if (laboratory.have_paleotest) then
   dofile(modpath.."/bone_grinder.lua");
   dofile(modpath.."/deoxyribonucleic_cultivator.lua");
   dofile(modpath.."/deoxyribonucleic_merger.lua")
-  
-  if (laboratory.have_archeology) then
-    dofile(modpath.."/dna_rewriter.lua");
-  end
+end
+
+if (laboratory.have_extraores) then
+  --dofile(modpath.."/water_electrolysis.lua")
+  --dofile(modpath.."/lump_grinder.lua");
+  --dofile(modpath.."/oxygen_furnace.lua")
+  --dofile(modpath.."/hydrogen_furnace.lua")
+  --dofile(modpath.."/nitrogen_furnace.lua")
 end
 
 dofile(modpath.."/craftitems.lua");

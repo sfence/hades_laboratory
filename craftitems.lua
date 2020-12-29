@@ -15,6 +15,7 @@ if (laboratory.have_paleotest) then
       "hades_laboratory:water_filter_dirty",
       {
         description = "Dirty filter for water filtration.",
+        _tt_help = "Can be cleaned in sterilizer.",
         inventory_image = "laboratory_water_filter_dirty.png",
         wield_image = "laboratory_water_filter_dirty.png",
         groups = {}
@@ -34,6 +35,7 @@ if (laboratory.have_paleotest) then
       "hades_laboratory:biomaterial_filter_dirty",
       {
         description = "Dirty filter for biomaterial filtration.",
+        _tt_help = "Can be cleaned in stelirizer.",
         inventory_image = "laboratory_biomaterial_filter_dirty.png",
         wield_image = "laboratory_biomaterial_filter_dirty.png",
         groups = {}
@@ -43,7 +45,8 @@ if (laboratory.have_paleotest) then
   minetest.register_craftitem(
       "hades_laboratory:sterilized_coal_lump",
       {
-        description = "Scoutred and sterilized coal lump.",
+        description = "Scoured and sterilized coal lump.",
+        _tt_help = "Use sterilizer to scour and sterilize coal lump.",
         inventory_image = "default_coal_lump.png",
         wield_image = "default_coal_lump.png",
         groups = {}
@@ -53,7 +56,8 @@ if (laboratory.have_paleotest) then
   minetest.register_craftitem(
       "hades_laboratory:sterilized_glass_bottle",
       {
-        description = "Sterilized glass bottle",
+        description = "Washed and sterilized glass bottle",
+        _tt_help = "Use sterilizr to wash and sterilize glass bottle.",
         inventory_image = "vessels_glass_bottle_inv.png",
         wield_image = "vessels_glass_bottle.png",
         groups = {}
@@ -62,7 +66,8 @@ if (laboratory.have_paleotest) then
   minetest.register_craftitem(
       "hades_laboratory:sterilized_steel_bottle",
       {
-        description = "Sterilized steel bottle",
+        description = "Washed and sterilized steel bottle",
+        _tt_help = "Use sterilizr to wash and sterilize steel bottle.",
         inventory_image = "vessels_steel_bottle_inv.png",
         wield_image = "vessels_steel_bottle.png",
         groups = {}
@@ -83,6 +88,7 @@ if (laboratory.have_paleotest) then
       "hades_laboratory:bottle_of_sugar",
       {
         description = "Bottle of sugar",
+        _tt_help = "Use medium mixer to mix it with water and get growth medium.",
         inventory_image = "laboratory_bottle_of_sugar.png",
         wield_image = "laboratory_bottle_of_sugar.png",
         groups = {}
@@ -228,6 +234,15 @@ if (laboratory.have_paleotest) then
       }
     );
   minetest.register_craftitem(
+      "hades_laboratory:server_board_8",
+      {
+        description = "Server board with 8 processors",
+        inventory_image = "laboratory_server_board_8.png",
+        wield_image = "laboratory_server_board_8.png",
+        groups = {}
+      }
+    );
+  minetest.register_craftitem(
       "hades_laboratory:super_computer",
       {
         description = "Super computer",
@@ -348,7 +363,7 @@ if (laboratory.have_paleotest) then
       minetest.register_craftitem(
           "hades_laboratory:dna_fragments_"..key,
           {
-            description = name.."i DNA fragments",
+            description = name.." DNA fragments",
             inventory_image = "laboratory_dna_fragments.png",
             wield_image = "laboratory_dna_fragments.png",
             groups = {}

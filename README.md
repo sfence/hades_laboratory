@@ -6,6 +6,10 @@ License of source code:
 -----------------------
 GPL 3 or newer
 
+Authors of source code:
+-----------------------
+SFENCE
+
 License of media (textures, sounds and models):
 -----------------------------------------------
 CC-0

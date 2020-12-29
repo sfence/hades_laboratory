@@ -144,7 +144,7 @@ if (laboratory.have_paleotest) then
         output = "hades_laboratory:biomaterial_filter_dirty",
         recipe = {
             {"hades_core:obsidian_glass", "hades_laboratory:sterilized_sand", "hades_laboratory:sterilized_coal_lump"},
-            {"hades_laboratory:gold_ingot", "hades_laboratory:sterilized_sand", "hades_laboratory:sterilized_coal_lump"},
+            {"hades_core:gold_ingot", "hades_laboratory:sterilized_sand", "hades_laboratory:sterilized_coal_lump"},
             {"hades_core:obsidian_glass", "hades_laboratory:sterilized_sand", "hades_laboratory:sterilized_coal_lump"},
           },
       }
@@ -235,10 +235,20 @@ if (laboratory.have_paleotest) then
     );
   minetest.register_craft(
       {
+        output = "hades_laboratory:server_board_8",
+        recipe = {
+            {"hades_laboratory:server_cpu", "hades_laboratory:server_cpu", "hades_laboratory:server_cpu"},
+            {"hades_laboratory:server_cpu", "hades_core:copper_ingot", "hades_laboratory:server_cpu"},
+            {"hades_laboratory:server_cpu", "hades_laboratory:server_cpu", "hades_laboratory:server_cpu"},
+          },
+      }
+    );
+  minetest.register_craft(
+      {
         output = "hades_laboratory:super_computer",
         recipe = {
-            {"hades_laboratory:server_cpu 8", "hades_laboratory:server_cpu 8", "hades_laboratory:server_cpu 8"},
-            {"hades_core:goldblock", "hades_laboratory:tinblock", "hades_core:copperblock"},
+            {"hades_laboratory:server_board_8", "hades_laboratory:server_board_8", "hades_laboratory:server_board_8"},
+            {"hades_core:goldblock", "hades_core:tinblock", "hades_core:copperblock"},
             {"hades_core:steel_ingot", "hades_materials:plastic_sheeting", "hades_core:steel_ingot"},
           },
       }

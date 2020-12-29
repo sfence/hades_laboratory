@@ -94,7 +94,7 @@ end
 
 minetest.register_node("hades_laboratory:biomaterial_filter", {
     description = "Biomaterial filter",
-    _tt_help = "Connect to power and water".."\n".."Keep only biomaterial in bottle",
+    _tt_help = "Connect to power and water".."\n".."Keep only biomaterial in bottle".."\n".."Use biomaterial filters.",
     tiles = {
         "laboratory_biomaterial_filter_top.png",
         "laboratory_biomaterial_filter_bottom.png",
