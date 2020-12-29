@@ -92,8 +92,10 @@ end
 -- Node --
 ----------
 
+local def_desc = "Biomaterial filter";
+
 minetest.register_node("hades_laboratory:biomaterial_filter", {
-    description = "Biomaterial filter",
+    description = def_desc,
     _tt_help = "Connect to power and water".."\n".."Keep only biomaterial in bottle".."\n".."Use biomaterial filters.",
     tiles = {
         "laboratory_biomaterial_filter_top.png",
@@ -261,6 +263,7 @@ minetest.register_node("hades_laboratory:biomaterial_filter", {
     on_construct = function(pos)
         local meta = minetest.get_meta(pos)
         meta:set_string("formspec", biomaterial_filter_fs)
+        meta:set_string("infotext", def_desc)
         local inv = meta:get_inventory()
         inv:set_size("input", 1)
         inv:set_size("filters_in", 1)

@@ -55,6 +55,16 @@ if (laboratory.have_paleotest) then
     );
   minetest.register_craft(
       {
+        output = "hades_laboratory:biomaterial_triple_filter",
+        recipe = {
+            {"hades_core:steelblock", "pipeworks:storage_tank_0", "hades_core:steelblock"},
+            {"hades_laboratory:biomaterial_filter", "hades_laboratory:biomaterial_filter", "hades_laboratory:biomaterial_filter"},
+            {"hades_core:goldblock", "pipeworks:valve_off_empty", "hades_core:goldblock"},
+          },
+      }
+    );
+  minetest.register_craft(
+      {
         output = "hades_laboratory:polymerase_extractor",
         recipe = {
             {"pipeworks:storage_tank_0", "pipeworks:valve_off_empty", "pipeworks:storage_tank_0"},
@@ -157,6 +167,18 @@ if (laboratory.have_paleotest) then
         burntime = 30,
       }
     );
+  
+  for i=2,5 do
+    minetest.register_craft(
+        {
+          type = "shapeless",
+          output = "hades_laboratory:growth_medium_complemented_"..i,
+          recipe = { "hades_core:sugar", 
+                     "hades_laboratory:growth_medium_remains_"..i,
+                  },
+        }
+      );
+  end
   
   minetest.register_craft(
       {

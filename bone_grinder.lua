@@ -113,9 +113,10 @@ end
 ----------
 -- Node --
 ----------
+local def_desc = "Bone Grinder";
 
 minetest.register_node("hades_laboratory:bone_grinder", {
-    description = "Bone Grinder",
+    description = def_desc,
     _tt_help = "Connect to power and water".."\n".."Grind bones to small pieces.",
     tiles = {
         "laboratory_bone_grinder_top.png",
@@ -286,6 +287,7 @@ minetest.register_node("hades_laboratory:bone_grinder", {
     on_construct = function(pos)
         local meta = minetest.get_meta(pos)
         meta:set_string("formspec", bone_grinder_fs)
+        meta:set_string("infotext", def_desc)
         local inv = meta:get_inventory()
         inv:set_size("input", 1)
         inv:set_size("blades_in", 1)

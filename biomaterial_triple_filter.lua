@@ -1,40 +1,40 @@
-----------------
--- Distilator --
-----------------
---- Ver 1.0 ----
+-------------------------------
+-- Biomaterial Triple Filter --
+-------------------------------
+----------- Ver 1.0 -----------
 -----------------------
 -- Initial Functions --
 -----------------------
 
-laboratory.distiller = {}
+laboratory.biomaterial_triple_filter = {}
 
-local distiller = laboratory.distiller
+local biomaterial_triple_filter = laboratory.biomaterial_triple_filter
 
-distiller.recipes = {}
+biomaterial_triple_filter.recipes = {}
 
-function distiller.register_recipe(input, output, time)
-    distiller.recipes[input] = output;
+function biomaterial_triple_filter.register_recipe(input, output)
+    biomaterial_triple_filter.recipes[input] = output
 end
 
 --------------
 -- Formspec --
 --------------
 
-local distiller_fs = "formspec_version[3]" .. "size[12.75,8.5]" ..
+local biomaterial_triple_filter_fs = "formspec_version[3]" .. "size[12.75,8.5]" ..
                               "background[-1.25,-1.25;15,10;laboratory_machine_formspec.png]" ..
                               "image[3.6,0.5;5.5,1.5;laboratory_progress_bar.png^[transformR270]]" ..
                               "list[current_player;main;1.5,3;8,4;]" ..
                               "list[context;input;2,0.25;1,1;]" ..
-                              "list[context;filters_in;2,1.5;1,1;]" ..
+                              "list[context;filters_in;1,1.5;2,1;]" ..
                               "list[context;output;9.75,0.25;1,1;]" ..
-                              "list[context;filters_out;9.75,1.5;1,1;]" ..
+                              "list[context;filters_out;9.75,1.5;2,1;]" ..
                               "listring[current_player;main]" ..
                               "listring[context;input]" ..
                               "listring[current_player;main]" ..
                               "listring[context;output]" ..
                               "listring[current_player;main]"
 
-local function get_active_distiller_fs(item_percent)
+local function get_active_biomaterial_triple_filter_fs(item_percent)
     local form = {
         "formspec_version[3]", "size[12.75,8.5]",
         "background[-1.25,-1.25;15,10;laboratory_machine_formspec.png]",
@@ -43,9 +43,9 @@ local function get_active_distiller_fs(item_percent)
             ":laboratory_progress_bar_full.png^[transformR270]]",
         "list[current_player;main;1.5,3;8,4;]",
         "list[context;input;2,0.25;1,1;]",
-        "list[context;filters_in;2,1.5;1,1;]",
+        "list[context;filters_in;1,1.5;2,1;]",
         "list[context;output;9.75,0.25;1,1;]",
-        "list[context;filters_out;9.75,1.5;1,1;]",
+        "list[context;filters_out;9.75,1.5;2,1;]",
         "listring[current_player;main]",
         "listring[context;input]", "listring[current_player;main]",
         "listring[context;output]", "listring[current_player;main]"
@@ -58,9 +58,9 @@ local function update_formspec(progress, goal, meta)
 
     if progress > 0 and progress <= goal then
         local item_percent = math.floor(progress / goal * 100)
-        formspec = get_active_distiller_fs(item_percent)
+        formspec = get_active_biomaterial_triple_filter_fs(item_percent)
     else
-        formspec = distiller_fs
+        formspec = biomaterial_triple_filter_fs
     end
 
     meta:set_string("formspec", formspec)
@@ -75,10 +75,10 @@ local function cultivate(pos)
     local inv = meta:get_inventory()
     local input_item = inv:get_stack("input", 1)
     --local filters_item = inv:get_stack("filters", 1)
-    local output_item = distiller.recipes[input_item:get_name()].output
+    local output_item = biomaterial_triple_filter.recipes[input_item:get_name()].output
     input_item:set_count(1)
 
-    if not distiller.recipes[input_item:get_name()] or
+    if not biomaterial_triple_filter.recipes[input_item:get_name()] or
         not inv:room_for_item("output", output_item) then
         minetest.get_node_timer(pos):stop()
         update_formspec(0, 3, meta)
@@ -92,18 +92,18 @@ end
 -- Node --
 ----------
 
-local def_desc = "Distiller";
+local def_desc = "Biomaterial triple filter";
 
-minetest.register_node("hades_laboratory:distiller", {
+minetest.register_node("hades_laboratory:biomaterial_triple_filter", {
     description = def_desc,
-    _tt_help = "Connect to power and water".."\n".."Fill bottle with filtered and distilled water",
+    _tt_help = "Connect to power and water".."\n".."Keep only biomaterial in bottle".."\n".."Use biomaterial filters.",
     tiles = {
-        "laboratory_distiller_top.png",
-        "laboratory_distiller_bottom.png",
-        "laboratory_distiller_side.png",
-        "laboratory_distiller_side.png",
-        "laboratory_distiller_side.png",
-        "laboratory_distiller_front.png"
+        "laboratory_biomaterial_triple_filter_top.png",
+        "laboratory_biomaterial_triple_filter_bottom.png",
+        "laboratory_biomaterial_triple_filter_side.png",
+        "laboratory_biomaterial_triple_filter_side.png",
+        "laboratory_biomaterial_triple_filter_side.png",
+        "laboratory_biomaterial_triple_filter_front.png"
     },
     paramtype2 = "facedir",
     groups = {cracky = 2, tubedevice = 1, tubedevice_receiver = 1},
@@ -135,8 +135,7 @@ minetest.register_node("hades_laboratory:distiller", {
         local inv = meta:get_inventory()
         local stack = inv:get_stack("input", 1)
         local filters_in = inv:get_stack("filters_in", 1)
-        local filters_out = inv:get_stack("filters_out", 1)
-        if not distiller.recipes[stack:get_name()] then return false end
+        if not biomaterial_triple_filter.recipes[stack:get_name()] then return false end
         
         local cultivating_time = meta:get_int("cultivating_time") or 0
         
@@ -151,25 +150,38 @@ minetest.register_node("hades_laboratory:distiller", {
           return true;
         end
         -- check for filters
-        if (filters_in:get_count()==0) then
+        if  (inv:contains_item("filters_in", ItemStack("hades_laboratory:biomaterial_filter_sterilized")) == false) then
+          return true;
+        end
+        -- check for starilized glass bottle
+        if  (inv:contains_item("filters_in", ItemStack("hades_laboratory:sterilized_glass_bottle")) == false) then
           return true;
         end
         -- check for free space of filters
-        if (filters_out:get_free_space()==0) then
+        if  (inv:room_for_item("filters_out", ItemStack("hades_laboratory:biomaterial_filter_dirty")) == false) then
           return true;
         end
       
-        local recipe = distiller.recipes[stack:get_name()]
-        local output_item = recipe;
-        local output_time = 180;
+        local recipe = biomaterial_triple_filter.recipes[stack:get_name()]
+        
+        local output_item = recipe.output;
+        local output_time = recipe.output_time;
+        local filter_time = recipe.filter_time;
         cultivating_time = cultivating_time + 1
-        if ((cultivating_time%90)==0) then
+        if not inv:room_for_item("output", output_item) then return true end
+        -- check for free space for remain
+        if  (inv:room_for_item("filters_out", ItemStack(recipe.remain)) == false) then
+          return true;
+        end
+        if ((cultivating_time%filter_time)==0) then
           filters_in:take_item(1);
           inv:set_stack("filters_in", 1, filters_in);
-          inv:add_item("filters_out", ItemStack("hades_laboratory:water_filter_dirty"));
+          inv:add_item("filters_out", ItemStack("hades_laboratory:biomaterial_filter_dirty"));
         end
-        if not inv:room_for_item("output", output_item) then return true end
-        if cultivating_time % output_time == 0 then cultivate(pos) end
+        if cultivating_time % output_time == 0 then
+          cultivate(pos) 
+          inv:add_item("filters_out", ItemStack(recipe.remain));
+        end
         update_formspec(cultivating_time % output_time, output_time, meta)
         meta:set_int("cultivating_time", cultivating_time)
 
@@ -182,17 +194,20 @@ minetest.register_node("hades_laboratory:distiller", {
         end
     end,
 
-    allow_metadata_inventory_put = function(pos, listname, _, stack, player)
+    allow_metadata_inventory_put = function(pos, listname, index, stack, player)
         if minetest.is_protected(pos, player:get_player_name()) then
             return 0
         end
         if listname == "input" then
-            return distiller.recipes[stack:get_name()] and
+            return biomaterial_triple_filter.recipes[stack:get_name()] and
                        stack:get_count() or 0
         end
         if listname == "filters_in" then
-            return stack:get_name()=="hades_laboratory:water_filter" and
-                       stack:get_count() or 0
+          if (stack:get_name()=="hades_laboratory:biomaterial_filter_sterilized") then
+            return stack:get_count() or 0;
+          elseif (stack:get_name()=="hades_laboratory:sterilized_glass_bottle") then
+            return stack:get_count() or 0;
+          end
         end
         return 0
     end,
@@ -222,16 +237,16 @@ minetest.register_node("hades_laboratory:distiller", {
         local inv = meta:get_inventory()
         local stack = inv:get_stack("input", 1)
         local filters_in = inv:get_stack("filters_in", 1)
-        local output_item = distiller.recipes[stack:get_name()]
+        local output_item = biomaterial_triple_filter.recipes[stack:get_name()]
         local cultivating_time = meta:get_int("cultivating_time") or 0
-        if not distiller.recipes[stack:get_name()] then
+        if not biomaterial_triple_filter.recipes[stack:get_name()] then
             timer:stop()
-            meta:set_string("formspec", distiller_fs)
+            meta:set_string("formspec", biomaterial_triple_filter_fs)
             return
         end
         if filters_in:get_count()==0 then
             timer:stop()
-            meta:set_string("formspec", distiller_fs)
+            meta:set_string("formspec", biomaterial_triple_filter_fs)
             return
         end
         if not inv:room_for_item("output", output_item) then
@@ -248,9 +263,9 @@ minetest.register_node("hades_laboratory:distiller", {
         local inv = meta:get_inventory()
         local stack = inv:get_stack("input", 1)
         local cultivating_time = meta:get_int("cultivating_time") or 0
-        if not distiller.recipes[stack:get_name()] then
+        if not biomaterial_triple_filter.recipes[stack:get_name()] then
             timer:stop()
-            meta:set_string("formspec", distiller_fs)
+            meta:set_string("formspec", biomaterial_triple_filter_fs)
             if cultivating_time > 0 then
                 meta:set_int("cultivating_time", 0)
             end
@@ -263,19 +278,19 @@ minetest.register_node("hades_laboratory:distiller", {
 
     on_construct = function(pos)
         local meta = minetest.get_meta(pos)
-        meta:set_string("formspec", distiller_fs)
+        meta:set_string("formspec", biomaterial_triple_filter_fs)
         meta:set_string("infotext", def_desc)
         local inv = meta:get_inventory()
         inv:set_size("input", 1)
-        inv:set_size("filters_in", 1)
+        inv:set_size("filters_in", 2)
         inv:set_size("output", 1)
-        inv:set_size("filters_out", 1)
+        inv:set_size("filters_out", 2)
     end,
     on_blast = function(pos)
         local drops = {}
         default.get_inventory_drops(pos, "input", drops)
         default.get_inventory_drops(pos, "output", drops)
-        table.insert(drops, "hades_laboratory:distiller")
+        table.insert(drops, "hades_laboratory:biomaterial_triple_filter")
         minetest.remove_node(pos)
         return drops
     end,
@@ -286,9 +301,6 @@ minetest.register_node("hades_laboratory:distiller", {
         minetest.get_meta(pos):set_int("is_powered", 1);
       end
     end,
-    after_dig_node = function(pos)
-      pipeworks.scan_for_pipe_objects(pos);
-    end,
 })
 
 -------------------------
@@ -296,7 +308,33 @@ minetest.register_node("hades_laboratory:distiller", {
 -------------------------
 
 if laboratory.have_paleotest then
-  distiller.register_recipe( "hades_laboratory:sterilized_steel_bottle",
-                              "hades_laboratory:steel_bottle_of_distilled_water")
+  biomaterial_triple_filter.register_recipe(
+      "hades_laboratory:medium_with_bacteries", 
+      {
+        output = "hades_laboratory:bottle_of_some_bacteries",
+        remain  = "hades_laboratory:growth_medium_remains_2",
+        output_time = 90,
+        filter_time = 90,
+      })
+  for i=2,4 do
+    local output_time = 60+20*i*i;
+    biomaterial_triple_filter.register_recipe(
+        "hades_laboratory:medium_with_bacteries_"..i, 
+        {
+          output = "hades_laboratory:bottle_of_some_bacteries",
+          remain = "hades_laboratory:growth_medium_remains_"..(i+1),
+          output_time = output_time,
+          filter_time = output_time/i,
+        })
+  end
+  local output_time = 60+20*25;
+  biomaterial_triple_filter.register_recipe(
+      "hades_laboratory:medium_with_bacteries_5", 
+      {
+        output = "hades_laboratory:bottle_of_some_bacteries",
+        remain  = "vessels:glass_bottle",
+        output_time = output_time,
+        filter_time = output_time/5,
+      })
 end
 

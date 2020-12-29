@@ -103,6 +103,38 @@ if (laboratory.have_paleotest) then
         groups = {}
       }
     );
+  for i=2,5 do
+    minetest.register_craftitem(
+        "hades_laboratory:growth_medium_use_"..i,
+        {
+          description = "Growth medium for bacteries cultivation",
+          _tt_help = i..". use",
+          inventory_image = "laboratory_growth_medium.png",
+          wield_image = "laboratory_growth_medium.png",
+          groups = {}
+        }
+      );
+    minetest.register_craftitem(
+        "hades_laboratory:growth_medium_remains_"..i,
+        {
+          description = "Remains of growth medium for bacteries cultivation",
+          _tt_help = "Add sugar to it and mix it or wash up it in sterilizer.".."\n"..i..". use",
+          inventory_image = "laboratory_growth_medium_remains.png",
+          wield_image = "laboratory_growth_medium_remains.png",
+          groups = {}
+        }
+      );
+    minetest.register_craftitem(
+        "hades_laboratory:growth_medium_complemented_"..i,
+        {
+          description = "Complemented growth medium for bacteries cultivation",
+          _tt_help = "Put in medium mixer to get useful growth medium.".."\n"..i..". use",
+          inventory_image = "laboratory_growth_medium_complemented.png",
+          wield_image = "laboratory_growth_medium_complemented.png",
+          groups = {}
+        }
+      );
+  end
   minetest.register_craftitem(
       "hades_laboratory:medium_with_bacteries",
       {
@@ -112,6 +144,18 @@ if (laboratory.have_paleotest) then
         groups = {}
       }
     );
+  for i=2,5 do
+    minetest.register_craftitem(
+        "hades_laboratory:medium_with_bacteries_"..i,
+        {
+          description = "Growth medium with cultivated bacteries",
+          _tt_help = i..". use",
+          inventory_image = "laboratory_medium_with_bacteries.png",
+          wield_image = "laboratory_medium_with_bacteries.png",
+          groups = {}
+        }
+      );
+  end
   
   minetest.register_craftitem(
       "hades_laboratory:bottle_of_some_bacteries",
@@ -122,6 +166,18 @@ if (laboratory.have_paleotest) then
         groups = {}
       }
     );
+  for i=2,5 do
+    minetest.register_craftitem(
+        "hades_laboratory:bottle_of_some_bacteries_"..i,
+        {
+          description = "Glass bottle of some bacteries",
+          _tt_help = i..". use",
+          inventory_image = "laboratory_glass_bottle_of_some_bacteries.png",
+          wield_image = "laboratory_glass_bottle_of_some_bacteries.png",
+          groups = {}
+        }
+      );
+  end
   minetest.register_craftitem(
       "hades_laboratory:bottle_of_bacteries",
       {

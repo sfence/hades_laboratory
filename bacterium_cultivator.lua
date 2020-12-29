@@ -85,8 +85,10 @@ end
 -- Node --
 ----------
 
+local def_desc = "Bacterium Cultivator";
+
 minetest.register_node("hades_laboratory:bacterium_cultivator", {
-    description = "Bacterium Cultivator",
+    description = def_desc,
     _tt_help = "Connect to power".."\n".."Cultivate bacteries in growth medium",
     tiles = {
         "laboratory_bacterium_cultivator_top.png",
@@ -211,6 +213,7 @@ minetest.register_node("hades_laboratory:bacterium_cultivator", {
     on_construct = function(pos)
         local meta = minetest.get_meta(pos)
         meta:set_string("formspec", bacterium_cultivator_fs)
+        meta:set_string("infotext", def_desc)
         local inv = meta:get_inventory()
         inv:set_size("input", 1)
         inv:set_size("output", 1)
@@ -244,6 +247,10 @@ minetest.register_node("hades_laboratory:bacterium_cultivator", {
 if (laboratory.have_paleotest) then
   bacterium_cultivator.register_recipe("hades_laboratory:growth_medium",
                              "hades_laboratory:medium_with_bacteries");
+  for i=2,5 do
+    bacterium_cultivator.register_recipe("hades_laboratory:growth_medium_use_"..i,
+                               "hades_laboratory:medium_with_bacteries_"..i);
+  end
 end
 
 

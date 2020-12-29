@@ -85,8 +85,10 @@ end
 -- Node --
 ----------
 
+local def_desc = "Medium mixer";
+
 minetest.register_node("hades_laboratory:medium_mixer", {
-    description = "Medium mixer",
+    description = def_desc,
     _tt_help = "Connect to power and water".."\n".."Mix bottle of something with water",
     tiles = {
         "laboratory_medium_mixer_top.png",
@@ -216,6 +218,7 @@ minetest.register_node("hades_laboratory:medium_mixer", {
     on_construct = function(pos)
         local meta = minetest.get_meta(pos)
         meta:set_string("formspec", medium_mixer_fs)
+        meta:set_string("infotext", def_desc)
         local inv = meta:get_inventory()
         inv:set_size("input", 1)
         inv:set_size("output", 1)
@@ -247,5 +250,9 @@ minetest.register_node("hades_laboratory:medium_mixer", {
 if laboratory.have_paleotest then
   medium_mixer.register_recipe("hades_laboratory:bottle_of_sugar",
                              "hades_laboratory:growth_medium")
+  for i=2,5 do
+    medium_mixer.register_recipe("hades_laboratory:growth_medium_complemented_"..i,
+                               "hades_laboratory:growth_medium_use_"..i)
+  end
 end
 

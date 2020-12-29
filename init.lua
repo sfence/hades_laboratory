@@ -10,6 +10,7 @@ laboratory.have_villages = minetest.get_modpath("hades_villages")~=nil;
 laboratory.have_skeleton = minetest.get_modpath("hades_skeleton")~=nil;
 
 laboratory.have_extraores = minetest.get_modpath("hades_extraores")~=nil;
+laboratory.have_technic_worldgen = minetest.get_modpath("hades_technic_worldgen")~=nil;
 
 
 if (laboratory.have_paleotest) then
@@ -20,6 +21,7 @@ if (laboratory.have_paleotest) then
   dofile(modpath.."/medium_mixer.lua");
   dofile(modpath.."/bacterium_cultivator.lua");
   dofile(modpath.."/biomaterial_filter.lua");
+  dofile(modpath.."/biomaterial_triple_filter.lua");
   dofile(modpath.."/polymerase_extractor.lua");
   dofile(modpath.."/dna_duplicator.lua");
   

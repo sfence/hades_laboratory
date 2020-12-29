@@ -92,8 +92,10 @@ end
 -- Node --
 ----------
 
+local def_desc = "Polymerase Extractor";
+
 minetest.register_node("hades_laboratory:polymerase_extractor", {
-    description = "Polymerase Extractor",
+    description = def_desc,
     _tt_help = "Connect to power".."\n".."Extract polymerase from bacteries and filter it for better result",
     tiles = {
         "laboratory_polymerase_extractor_top.png",
@@ -257,6 +259,7 @@ minetest.register_node("hades_laboratory:polymerase_extractor", {
     on_construct = function(pos)
         local meta = minetest.get_meta(pos)
         meta:set_string("formspec", polymerase_extractor_fs)
+        meta:set_string("infotext", def_desc)
         local inv = meta:get_inventory()
         inv:set_size("input", 1)
         inv:set_size("filters_in", 1)

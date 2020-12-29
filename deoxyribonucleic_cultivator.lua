@@ -94,8 +94,10 @@ end
 -- Node --
 ----------
 
+local def_desc = "Deoxyribonucleic Cultivator";
+
 minetest.register_node("hades_laboratory:deoxyribonucleic_cultivator", {
-    description = "Deoxyribonucleic Cultivator",
+    description = def_desc,
     _tt_help = "Connect to power and water".."\n".."Keep process runnings".."\n".."Cultivate miniature fragments of deoxyribonucletic acid from prepared bones",
     tiles = {
         "laboratory_deoxyribonucleic_cultivator_top.png",
@@ -292,6 +294,7 @@ minetest.register_node("hades_laboratory:deoxyribonucleic_cultivator", {
     on_construct = function(pos)
         local meta = minetest.get_meta(pos)
         meta:set_string("formspec", deoxyribonucleic_cultivator_fs)
+        meta:set_string("infotext", def_desc)
         local inv = meta:get_inventory()
         inv:set_size("input", 1)
         inv:set_size("polymerases_in", 1)

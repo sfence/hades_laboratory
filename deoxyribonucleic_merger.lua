@@ -93,8 +93,10 @@ end
 -- Node --
 ----------
 
+local def_desc = "Deoxyribonucleic Merger";
+
 minetest.register_node("hades_laboratory:deoxyribonucleic_merger", {
-    description = "Deoxyribonucleic Merger",
+    description = def_desc,
     _tt_help = "Connect to power".."\n".."Calculate how to join DNA fragments together and do it",
     tiles = {
         "laboratory_deoxyribonucleic_merger_top.png",
@@ -280,6 +282,7 @@ minetest.register_node("hades_laboratory:deoxyribonucleic_merger", {
     on_construct = function(pos)
         local meta = minetest.get_meta(pos)
         meta:set_string("formspec", deoxyribonucleic_merger_fs)
+        meta:set_string("infotext", def_desc)
         local inv = meta:get_inventory()
         inv:set_size("input", 1)
         inv:set_size("water_in", 1)

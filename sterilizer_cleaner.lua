@@ -85,8 +85,10 @@ end
 -- Node --
 ----------
 
+local def_desc = "Sterilizer and cleaner",
+
 minetest.register_node("hades_laboratory:sterilizer", {
-    description = "Sterilizer and cleaner",
+    description = def_desc,
     _tt_help = "Connect to power and water".."\n".."Clean and sterilize botte",
     tiles = {
         "laboratory_sterilizer_top.png",
@@ -215,6 +217,7 @@ minetest.register_node("hades_laboratory:sterilizer", {
     on_construct = function(pos)
         local meta = minetest.get_meta(pos)
         meta:set_string("formspec", sterilizer_fs)
+        meta:set_string("infotext", def_desc)
         local inv = meta:get_inventory()
         inv:set_size("input", 1)
         inv:set_size("output", 1)
@@ -233,9 +236,6 @@ minetest.register_node("hades_laboratory:sterilizer", {
       if (not minetest.global_exists("mesecon")) then
         minetest.get_meta(pos):set_int("is_powered", 1);
       end
-    end,
-    after_dig_node = function(pos)
-      pipeworks.scan_for_pipe_objects(pos);
     end,
 })
 
@@ -261,5 +261,10 @@ if (laboratory.have_paleotest) then
   
   sterilizer.register_recipe("hades_core:fertile_sand",
                                "hades_laboratory:sterilized_sand");
+  
+  for i=2,5 do
+    sterilizer.register_recipe("hades_laboratory:growth_medium_remains_"..i,
+                               "hades_laboratory:sterilized_glass_bottle");
+  end
 end
 

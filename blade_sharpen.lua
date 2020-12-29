@@ -85,8 +85,10 @@ end
 -- Node --
 ----------
 
+local def_desc = "Blade Sharpen";
+
 minetest.register_node("hades_laboratory:blade_sharpen", {
-    description = "Blade Sharpen",
+    description = def_desc,
     _tt_help = "Connect to power and water".."\n".."Make blunt metal blades sharp again",
     tiles = {
         "laboratory_blade_sharpen_top.png",
@@ -216,6 +218,7 @@ minetest.register_node("hades_laboratory:blade_sharpen", {
     on_construct = function(pos)
         local meta = minetest.get_meta(pos)
         meta:set_string("formspec", blade_sharpen_fs)
+        meta:set_string("infotext", def_desc)
         local inv = meta:get_inventory()
         inv:set_size("input", 1)
         inv:set_size("output", 1)
