@@ -429,3 +429,32 @@ if (laboratory.have_paleotest) then
   end
 end
 
+if laboratory.have_extraores then
+  minetest.register_craftitem(
+      "hades_laboratory:gas_cylinder",
+      {
+        description = "Empty gas cylinder",
+        inventory_image = "laboratory_gas_cylinder.png",
+        wield_image = "laboratory_gas_cylinder.png",
+        groups = {}
+      }
+    );
+  minetest.register_craftitem(
+      "hades_laboratory:gas_cylinder_oxygen",
+      {
+        description = "Gas cylinder with oxygen",
+        inventory_image = "laboratory_gas_cylinder_oxygen.png",
+        wield_image = "laboratory_gas_cylinder_oxygen.png",
+        groups = {}
+      }
+    );
+  minetest.register_craftitem(
+      "hades_laboratory:gas_cylinder_hydrogen",
+      {
+        description = "Gas cylinder with hydrogen",
+        inventory_image = "laboratory_gas_cylinder_hydrogen.png",
+        wield_image = "laboratory_gas_cylinder_hydrogen.png",
+        groups = {}
+      }
+    );
+end

@@ -85,7 +85,7 @@ end
 -- Node --
 ----------
 
-local def_desc = "Sterilizer and cleaner",
+local def_desc = "Sterilizer and cleaner";
 
 minetest.register_node("hades_laboratory:sterilizer", {
     description = def_desc,

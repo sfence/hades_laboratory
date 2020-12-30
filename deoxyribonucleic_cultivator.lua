@@ -98,7 +98,7 @@ local def_desc = "Deoxyribonucleic Cultivator";
 
 minetest.register_node("hades_laboratory:deoxyribonucleic_cultivator", {
     description = def_desc,
-    _tt_help = "Connect to power and water".."\n".."Keep process runnings".."\n".."Cultivate miniature fragments of deoxyribonucletic acid from prepared bones",
+    _tt_help = "Connect to power and water".."\n".."Keep process running".."\n".."Cultivate miniature fragments of deoxyribonucletic acid from prepared bones.".."\n".."Use steel botle of polymerases to cultivate miniature fragments of deoxyribonucletic acid.",
     tiles = {
         "laboratory_deoxyribonucleic_cultivator_top.png",
         "laboratory_deoxyribonucleic_cultivator_bottom.png",
@@ -193,7 +193,7 @@ minetest.register_node("hades_laboratory:deoxyribonucleic_cultivator", {
         local output_item = recipe;
         local output_time = 360;
         cultivating_time = cultivating_time + 1
-        if ((cultivating_time%60)==0) then
+        if ((cultivating_time%360)==0) then
           polymerases_in:take_item(1);
           inv:set_stack("polymerases_in", 1, polymerases_in);
           inv:add_item("polymerases_out", ItemStack("vessels:steel_bottle"));

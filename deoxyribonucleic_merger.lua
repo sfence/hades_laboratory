@@ -97,7 +97,7 @@ local def_desc = "Deoxyribonucleic Merger";
 
 minetest.register_node("hades_laboratory:deoxyribonucleic_merger", {
     description = def_desc,
-    _tt_help = "Connect to power".."\n".."Calculate how to join DNA fragments together and do it",
+    _tt_help = "Connect to power".."\n".."Calculate how to join DNA fragments together and do it".."\n".."Use steel bottles of distilated water.",
     tiles = {
         "laboratory_deoxyribonucleic_merger_top.png",
         "laboratory_deoxyribonucleic_merger_bottom.png",

@@ -96,7 +96,7 @@ local def_desc = "Biomaterial triple filter";
 
 minetest.register_node("hades_laboratory:biomaterial_triple_filter", {
     description = def_desc,
-    _tt_help = "Connect to power and water".."\n".."Keep only biomaterial in bottle".."\n".."Use biomaterial filters.",
+    _tt_help = "Connect to power and water".."\n".."Keep only biomaterial in bottle".."\n".."Use biomaterial filters and sterilized glass bottles.",
     tiles = {
         "laboratory_biomaterial_triple_filter_top.png",
         "laboratory_biomaterial_triple_filter_bottom.png",

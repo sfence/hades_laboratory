@@ -16,9 +16,9 @@ if (laboratory.have_paleotest) then
       {
         output = "hades_laboratory:distiller",
         recipe = {
-            {"hades_core:steel_ingot", "pipeworks:storage_tank_0", "hades_core:steel_ingot"},
+            {"hades_core:bronze_ingot", "pipeworks:storage_tank_0", "hades_core:bronze_ingot"},
             {"hades_core:goldblock", "pipeworks:valve_off_empty", "hades_core:goldblock"},
-            {"hades_core:steel_ingot", "pipeworks:mese_filter", "hades_core:steel_ingot"},
+            {"hades_core:bronze_ingot", "pipeworks:mese_filter", "hades_core:bronze_ingot"},
           },
       }
     );

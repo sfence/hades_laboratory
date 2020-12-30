@@ -117,7 +117,7 @@ local def_desc = "Bone Grinder";
 
 minetest.register_node("hades_laboratory:bone_grinder", {
     description = def_desc,
-    _tt_help = "Connect to power and water".."\n".."Grind bones to small pieces.",
+    _tt_help = "Connect to power and water".."\n".."Grind bones to small pieces.".."\n".."use blade to grind bones.",
     tiles = {
         "laboratory_bone_grinder_top.png",
         "laboratory_bone_grinder_bottom.png",
@@ -213,9 +213,8 @@ minetest.register_node("hades_laboratory:bone_grinder", {
                        stack:get_count() or 0
         end
         if listname == "blades_in" then
-            return (stack:get_name()=="hades_laboratory:steel_blade_sharp" 
-                    or stack:get_name()=="hades_laboratory:diamond_blade_sharp")
-                    and stack:get_count() or 0
+            return bone_grinder.blades[stack:get_name()] and
+                       stack:get_count() or 0
         end
         return 0
     end,
@@ -308,9 +307,6 @@ minetest.register_node("hades_laboratory:bone_grinder", {
       if (not minetest.global_exists("mesecon")) then
         minetest.get_meta(pos):set_int("is_powered", 1);
       end
-    end,
-    after_dig_node = function(pos)
-      pipeworks.scan_for_pipe_objects(pos);
     end,
 })
 

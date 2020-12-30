@@ -96,7 +96,7 @@ local def_desc = "DNA duplicator";
 
 minetest.register_node("hades_laboratory:dna_duplicator", {
     description = def_desc,
-    _tt_help = "Connect to power and water".."\n".."Keep process running".."\n".."use polymerases to duplicate DNA",
+    _tt_help = "Connect to power and water".."\n".."Keep process running".."\n".."Use glass bottle of polymerases to duplicate DNA.",
     tiles = {
         "laboratory_dna_duplicator_top.png",
         "laboratory_dna_duplicator_bottom.png",
@@ -189,10 +189,10 @@ minetest.register_node("hades_laboratory:dna_duplicator", {
       
         local output_item = dna_duplicator.recipes[stack:get_name()]
         cultivating_time = cultivating_time + 1
-        if ((cultivating_time%10)==0) then
+        if ((cultivating_time%150)==0) then
           polymerases_in:take_item(1);
           inv:set_stack("polymerases_in", 1, polymerases_in);
-          inv:add_item("polymerases_out", ItemStack("vessels:steel_bottle"));
+          inv:add_item("polymerases_out", ItemStack("vessels:glass_bottle"));
         end
         if not inv:room_for_item("output", output_item) then return true end
         if cultivating_time % 300 == 0 then cultivate(pos) end
@@ -217,7 +217,7 @@ minetest.register_node("hades_laboratory:dna_duplicator", {
                        stack:get_count() or 0
         end
         if listname == "polymerases_in" then
-            return stack:get_name()=="hades_laboratory:steel_bottle_of_polymerase" and
+            return stack:get_name()=="hades_laboratory:glass_bottle_of_polymerase" and
                        stack:get_count() or 0
         end
         return 0

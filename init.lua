@@ -11,6 +11,7 @@ laboratory.have_skeleton = minetest.get_modpath("hades_skeleton")~=nil;
 
 laboratory.have_extraores = minetest.get_modpath("hades_extraores")~=nil;
 laboratory.have_technic_worldgen = minetest.get_modpath("hades_technic_worldgen")~=nil;
+laboratory.have_technic = minetest.get_modpath("hades_technic")~=nil;
 
 
 if (laboratory.have_paleotest) then
