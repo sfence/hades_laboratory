@@ -13,11 +13,13 @@ laboratory.have_extraores = minetest.get_modpath("hades_extraores")~=nil;
 laboratory.have_technic_worldgen = minetest.get_modpath("hades_technic_worldgen")~=nil;
 laboratory.have_technic = minetest.get_modpath("hades_technic")~=nil;
 
-
-if (laboratory.have_paleotest) then
-  dofile(modpath.."/sterilizer_cleaner.lua");
-  dofile(modpath.."/distiller.lua");
   
+dofile(modpath.."/functions.lua");
+
+dofile(modpath.."/sterilizer_cleaner.lua");
+dofile(modpath.."/distiller.lua");
+
+if (laboratory.have_paleotest) then  
   -- dna duplicate
   dofile(modpath.."/medium_mixer.lua");
   dofile(modpath.."/bacterium_cultivator.lua");
@@ -38,7 +40,7 @@ if (laboratory.have_paleotest) then
 end
 
 if (laboratory.have_extraores) then
-  --dofile(modpath.."/water_electrolysis.lua")
+  dofile(modpath.."/water_electrolysis.lua")
   --dofile(modpath.."/lump_grinder.lua");
   --dofile(modpath.."/oxygen_furnace.lua")
   --dofile(modpath.."/hydrogen_furnace.lua")
