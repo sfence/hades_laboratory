@@ -130,6 +130,21 @@ if (laboratory.have_paleotest) then
   --  items
   minetest.register_craft(
       {
+        type = "shapeless",
+        output = "hades_laboratory:sterilized_glass_bottle",
+        recipe = {"vessels:glass_bottle"},
+      }
+    );
+  minetest.register_craft(
+      {
+        type = "shapeless",
+        output = "hades_laboratory:sterilized_steel_bottle",
+        recipe = {"vessels:steel_bottle"},
+      }
+    );
+  
+  minetest.register_craft(
+      {
         output = "hades_laboratory:bottle_of_sugar",
         recipe = {
             {"hades_core:sugar", "hades_core:sugar", "hades_core:sugar"},
@@ -188,7 +203,14 @@ if (laboratory.have_paleotest) then
             {"hades_laboratory:bottle_of_some_bacteries", "hades_laboratory:bottle_of_some_bacteries", "hades_laboratory:bottle_of_some_bacteries"},
             {"", "hades_laboratory:sterilized_glass_bottle", ""},
           },
-        replacements = {{"hades_laboratory:","vessels:glass_bottle"}},
+        replacements = {
+          {"hades_laboratory:bottle_of_some_bacteries","vessels:glass_bottle"},
+          {"hades_laboratory:bottle_of_some_bacteries","vessels:glass_bottle"},
+          {"hades_laboratory:bottle_of_some_bacteries","vessels:glass_bottle"},
+          {"hades_laboratory:bottle_of_some_bacteries","vessels:glass_bottle"},
+          {"hades_laboratory:bottle_of_some_bacteries","vessels:glass_bottle"},
+          {"hades_laboratory:bottle_of_some_bacteries","vessels:glass_bottle"},
+                      },
       }
     );
   
@@ -200,7 +222,14 @@ if (laboratory.have_paleotest) then
             {"hades_laboratory:glass_bottle_of_some_polymerase", "hades_laboratory:glass_bottle_of_some_polymerase", "hades_laboratory:glass_bottle_of_some_polymerase"},
             {"", "hades_laboratory:sterilized_glass_bottle", ""},
           },
-        replacements = {{"hades_laboratory:","vessels:glass_bottle"}},
+        replacements = {
+          {"hades_laboratory:glass_bottle_of_some_polymerase","vessels:glass_bottle"},
+          {"hades_laboratory:glass_bottle_of_some_polymerase","vessels:glass_bottle"},
+          {"hades_laboratory:glass_bottle_of_some_polymerase","vessels:glass_bottle"},
+          {"hades_laboratory:glass_bottle_of_some_polymerase","vessels:glass_bottle"},
+          {"hades_laboratory:glass_bottle_of_some_polymerase","vessels:glass_bottle"},
+          {"hades_laboratory:glass_bottle_of_some_polymerase","vessels:glass_bottle"},
+                       },
       }
     );
   minetest.register_craft(

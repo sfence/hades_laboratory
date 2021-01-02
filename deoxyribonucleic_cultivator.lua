@@ -98,7 +98,7 @@ local def_desc = "Deoxyribonucleic Cultivator";
 
 minetest.register_node("hades_laboratory:deoxyribonucleic_cultivator", {
     description = def_desc,
-    _tt_help = "Connect to power and water".."\n".."Keep process running".."\n".."Cultivate miniature fragments of deoxyribonucletic acid from prepared bones.".."\n".."Use steel botle of polymerases to cultivate miniature fragments of deoxyribonucletic acid.",
+    _tt_help = "Connect to power and water".."\n".."Keep process running".."\n".."Cultivate miniature fragments of deoxyribonucletic acid from prepared bones.".."\n".."Use glass bottle of polymerases to cultivate miniature fragments of deoxyribonucletic acid.".."\n".."Use bones dust for more effectivity.",
     tiles = {
         "laboratory_deoxyribonucleic_cultivator_top.png",
         "laboratory_deoxyribonucleic_cultivator_bottom.png",
@@ -196,7 +196,7 @@ minetest.register_node("hades_laboratory:deoxyribonucleic_cultivator", {
         if ((cultivating_time%360)==0) then
           polymerases_in:take_item(1);
           inv:set_stack("polymerases_in", 1, polymerases_in);
-          inv:add_item("polymerases_out", ItemStack("vessels:steel_bottle"));
+          inv:add_item("polymerases_out", ItemStack("vessels:glass_bottle"));
         end
         if not inv:room_for_item("output", output_item) then return true end
         if cultivating_time % output_time == 0 then cultivate(pos) end
@@ -221,7 +221,7 @@ minetest.register_node("hades_laboratory:deoxyribonucleic_cultivator", {
                        stack:get_count() or 0
         end
         if listname == "polymerases_in" then
-            return stack:get_name()=="hades_laboratory:steel_bottle_of_polymerase" and
+            return stack:get_name()=="hades_laboratory:glass_bottle_of_polymerase" and
                        stack:get_count() or 0
         end
         return 0

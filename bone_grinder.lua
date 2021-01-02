@@ -117,7 +117,7 @@ local def_desc = "Bone Grinder";
 
 minetest.register_node("hades_laboratory:bone_grinder", {
     description = def_desc,
-    _tt_help = "Connect to power and water".."\n".."Grind bones to small pieces.".."\n".."use blade to grind bones.",
+    _tt_help = "Connect to power and water".."\n".."Grind bones to small pieces.".."\n".."Use blades to grind known bones, to prepare them for cultivation.",
     tiles = {
         "laboratory_bone_grinder_top.png",
         "laboratory_bone_grinder_bottom.png",

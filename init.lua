@@ -19,6 +19,9 @@ dofile(modpath.."/functions.lua");
 dofile(modpath.."/sterilizer_cleaner.lua");
 dofile(modpath.."/distiller.lua");
 
+dofile(modpath.."/blade_sharpen.lua");
+dofile(modpath.."/wheel_blade_sharpen.lua");
+
 if (laboratory.have_paleotest) then  
   -- dna duplicate
   dofile(modpath.."/medium_mixer.lua");
@@ -33,7 +36,6 @@ if (laboratory.have_paleotest) then
     dofile(modpath.."/bone_modeler.lua");
   end
   
-  dofile(modpath.."/blade_sharpen.lua");
   dofile(modpath.."/bone_grinder.lua");
   dofile(modpath.."/deoxyribonucleic_cultivator.lua");
   dofile(modpath.."/deoxyribonucleic_merger.lua")

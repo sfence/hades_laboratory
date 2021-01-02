@@ -1,5 +1,15 @@
 -- craft items
 
+minetest.register_craftitem(
+    "hades_laboratory:diamond_grinding_wheel",
+    {
+      description = "Diamond grinding wheel",
+      inventory_image = "laboratory_diamond_grinding_wheel.png",
+      wield_image = "laboratory_diamond_grinding_wheel.png",
+      groups = {}
+    }
+  );
+
 if (laboratory.have_paleotest) then
   -- items
   minetest.register_craftitem(
@@ -219,7 +229,7 @@ if (laboratory.have_paleotest) then
   minetest.register_craftitem(
       "hades_laboratory:steel_blade_blunt",
       {
-        description = "Steel hunt blade",
+        description = "Steel blunt blade",
         inventory_image = "laboratory_steel_blade.png",
         wield_image = "laboratory_steel_blade.png",
         groups = {}
@@ -237,7 +247,7 @@ if (laboratory.have_paleotest) then
   minetest.register_craftitem(
       "hades_laboratory:titan_blade_blunt",
       {
-        description = "Titan hunt blade",
+        description = "Titan blunt blade",
         inventory_image = "laboratory_titan_blade.png",
         wield_image = "laboratory_titan_blade.png",
         groups = {}
@@ -255,7 +265,7 @@ if (laboratory.have_paleotest) then
   minetest.register_craftitem(
       "hades_laboratory:diamond_blade_blunt",
       {
-        description = "Diamond hunt blade",
+        description = "Diamond blunt blade",
         inventory_image = "laboratory_diamond_blade.png",
         wield_image = "laboratory_diamond_blade.png",
         groups = {}

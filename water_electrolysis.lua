@@ -64,21 +64,34 @@ end
 -- Inactive/Active --
 ---------------------
 
+local LV_EU_demand = 2000;
+local MV_EU_demand = 2000;
+local HV_EU_demand = 2000;
+local LV_EU_demand = 100;
+
 local function activate(pos, meta)
   minetest.get_node_timer(pos):start(1)
-  laboratory.swap_node(pos, "hades_laboratory:water_electrolysis_active");
+  --laboratory.swap_node(pos, "hades_laboratory:water_electrolysis_active");
+  meta:set_int("LV_EU_demand", LV_EU_demand)
 end
 
 local function deactivate(pos, meta)
   minetest.get_node_timer(pos):stop()
   update_formspec(0, 3, meta)
   laboratory.swap_node(pos, "hades_laboratory:water_electrolysis");
+  meta:set_int("LV_EU_demand", 0)
 end
-local function running(pos)
+local function running(pos, meta)
   laboratory.swap_node(pos, "hades_laboratory:water_electrolysis_active");
+  meta:set_int("LV_EU_demand", LV_EU_demand)
 end
-local function waiting(pos)
+local function waiting(pos, meta)
   laboratory.swap_node(pos, "hades_laboratory:water_electrolysis");
+  meta:set_int("LV_EU_demand", 0)
+end
+local function no_power(pos, meta)
+  laboratory.swap_node(pos, "hades_laboratory:water_electrolysis");
+  meta:set_int("LV_EU_demand", LV_EU_demand)
 end
 
 ---------------
@@ -137,25 +150,32 @@ local on_timer = function(pos)
       
       local cultivating_time = meta:get_int("cultivating_time") or 0
       
-      -- check if node is powered
-      local is_powered = minetest.get_meta(pos):get_int("is_powered");
-      if (is_powered==0) then
-        waiting(pos);
-        return true;
-      end
       -- check for empty gas cylinders
       if (stack:get_count()<2) then
-        waiting(pos);
+        waiting(pos, meta);
         return true;
       end
       -- check for water
       if (water_in:get_count()==0) then
-        waiting(pos);
+        waiting(pos, meta);
         return true;
       end
       -- check for free space of water
       if (water_out:get_free_space()==0) then
-        waiting(pos);
+        waiting(pos, meta);
+        return true;
+      end
+      -- check if node is powered
+      local is_powered = meta:get_int("is_powered");
+      if (is_powered==0) then
+        waiting(pos, meta);
+        return true;
+      end
+      -- check if node is powered LV
+      local eu_input = meta:get_int("LV_EU_input")
+;
+      if (eu_input<LV_EU_demand) then
+        no_power(pos, meta);
         return true;
       end
     
@@ -169,12 +189,15 @@ local on_timer = function(pos)
       end
       if not inv:room_for_item("output", "hades_laboratory:gas_cylinder_oxygen") then return true end
       if not inv:room_for_item("output", "hades_laboratory:gas_cylinder_hydrogen") then return true end
-      if cultivating_time % output_time == 0 then cultivate(pos) end
+      if cultivating_time % output_time == 0 then 
+        cultivate(pos)
+        cultivating_time = 0;
+      end
       update_formspec(cultivating_time % output_time, output_time, meta)
       meta:set_int("cultivating_time", cultivating_time)
 
       if (not stack:is_empty()) then
-          running(pos);
+          running(pos, meta);
           return true
       else
           meta:set_int("cultivating_time", 0)
@@ -279,7 +302,7 @@ local def_desc = "Water Electrolysis";
 
 minetest.register_node("hades_laboratory:water_electrolysis", {
     description = def_desc,
-    _tt_help = "Connect to power and water".."\n".."Grind bones to small pieces.".."\n".."use blade to grind bones.",
+    _tt_help = "Connect to power".."\n".."Change water to oxygen and hydrogen..".."\n".."Fill gas cylinders.".."\n",
     tiles = {
         "laboratory_water_electrolysis_top.png",
         "laboratory_water_electrolysis_bottom.png",
@@ -289,11 +312,22 @@ minetest.register_node("hades_laboratory:water_electrolysis", {
         "laboratory_water_electrolysis_front.png"
     },
     paramtype2 = "facedir",
-    groups = {cracky = 2, tubedevice = 1, tubedevice_receiver = 1},
+    groups = {cracky = 2, tubedevice = 1, tubedevice_receiver = 1, technic_machine = 1, technic_lv = 1},
     legacy_facedir_simple = true,
     is_ground_content = false,
     sounds = hades_sounds.node_sound_stone_defaults(),
     drawtype = "node",
+    
+    -- power connect
+    connect_sides = {"back"}, 
+    
+    -- tube connect
+    tube = {
+      connect_sides = {left = 1, right = 1}, 
+    },
+    
+    -- pipe connect
+    pipe_connections = { top = true },
     
     -- mssecon action
     mesecons = mesecons_action,
@@ -349,9 +383,10 @@ minetest.register_node("hades_laboratory:water_electrolysis_active", {
           }
         }
     },
-    drops = "hades_laboratory:water_electrolysis",
+    drop = "hades_laboratory:water_electrolysis",
     paramtype2 = "facedir",
-    groups = {cracky = 2, tubedevice = 1, tubedevice_receiver = 1},
+    groups = {cracky = 2, tubedevice = 1, tubedevice_receiver = 1, technic_machine = 1, technic_lv = 1, not_in_creative_inventory = 1},
+    connect_sides = {"back", "left", "right"}, 
     legacy_facedir_simple = true,
     is_ground_content = false,
     sounds = hades_sounds.node_sound_stone_defaults(),
@@ -374,4 +409,9 @@ minetest.register_node("hades_laboratory:water_electrolysis_active", {
   
     on_blast = on_blast,
 })
+
+if laboratory.have_technic then
+  technic.register_machine("LV", "hades_laboratory:water_electrolysis",        technic.receiver)
+  technic.register_machine("LV", "hades_laboratory:water_electrolysis", technic.receiver)
+end
 
