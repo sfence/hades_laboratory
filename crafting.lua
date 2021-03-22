@@ -131,15 +131,15 @@ if (laboratory.have_paleotest) then
   minetest.register_craft(
       {
         type = "shapeless",
-        output = "hades_laboratory:sterilized_glass_bottle",
-        recipe = {"vessels:glass_bottle"},
+        output = "vessels:glass_bottle",
+        recipe = {"hades_laboratory:sterilized_glass_bottle"},
       }
     );
   minetest.register_craft(
       {
         type = "shapeless",
-        output = "hades_laboratory:sterilized_steel_bottle",
-        recipe = {"vessels:steel_bottle"},
+        output = "vessels:steel_bottle",
+        recipe = {"hades_laboratory:sterilized_steel_bottle"},
       }
     );
   

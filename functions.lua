@@ -147,6 +147,7 @@ local recipes = {
           outputs = {"output_item", {"multi_output1", "multi_output2"}}, -- list of one or more outputs, if more outputs, one record is selected
           require_usage = {["item"]=true}, -- nil, if every usage item can be used
           production_time = 160, -- time to product outputs
+          consumption_step_size = 1,
         },
     },
   usages = {

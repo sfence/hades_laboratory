@@ -203,7 +203,7 @@ local on_timer = function(pos)
     
     -- time update
     local production_step_size = laboratory.recipe_step_size(use_usage.production_step_size*speed);
-    local consumption_step_size = laboratory.recipe_step_size(speed);
+    local consumption_step_size = laboratory.recipe_step_size(speed*use_usage.consumption_step_size);
     
     production_time = production_time + production_step_size;
     consumption_time = consumption_time + consumption_step_size;
@@ -465,6 +465,7 @@ laboratory.recipe_register_input( wheel_blade_sharpen.recipes,
     inputs = 1,
     outputs = {"hades_laboratory:steel_blade_sharp"},
     production_time = 30,
+    consumption_step_size = 1,
   });
 laboratory.recipe_register_input( wheel_blade_sharpen.recipes,
   "hades_laboratory:titan_blade_blunt",
@@ -472,6 +473,7 @@ laboratory.recipe_register_input( wheel_blade_sharpen.recipes,
     inputs = 1,
     outputs = {"hades_laboratory:titan_blade_sharp"},
     production_time = 60,
+    consumption_step_size = 1,
   });
 laboratory.recipe_register_input( wheel_blade_sharpen.recipes,
   "hades_laboratory:tungsten_blade_blunt",
@@ -479,6 +481,7 @@ laboratory.recipe_register_input( wheel_blade_sharpen.recipes,
     inputs = 1,
     outputs = {"hades_laboratory:tungsten_blade_sharp"},
     production_time = 90,
+    consumption_step_size = 1,
   });
 laboratory.recipe_register_input( wheel_blade_sharpen.recipes,
   "hades_laboratory:diamond_blade_blunt",
@@ -487,5 +490,6 @@ laboratory.recipe_register_input( wheel_blade_sharpen.recipes,
     outputs = {"hades_laboratory:diamond_blade_sharp"},
     require_usage = {["hades_laboratory:diamond_grinding_wheel"]=true},
     production_time = 120,
+    consumption_step_size = 1,
   });
 
