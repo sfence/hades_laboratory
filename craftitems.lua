@@ -12,8 +12,9 @@ minetest.register_craftitem(
 
 if (laboratory.have_paleotest) then
   -- items
+  minetest.register_alias("hades_laboratory:water_filter", "hades_laboratory:water_filter_sterilized")
   minetest.register_craftitem(
-      "hades_laboratory:water_filter",
+      "hades_laboratory:water_filter_sterilized",
       {
         description = "Filter for water filtration.",
         inventory_image = "laboratory_water_filter.png",

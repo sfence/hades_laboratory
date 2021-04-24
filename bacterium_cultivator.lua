@@ -1,256 +1,146 @@
 --------------------------
 -- Bacterium Cultivator --
 --------------------------
---------- Ver 1.0 --------
+--------- Ver 2.0 --------
 -----------------------
 -- Initial Functions --
 -----------------------
-laboratory.bacterium_cultivator = {}
+local S = laboratory.translator;
 
-local bacterium_cultivator = laboratory.bacterium_cultivator
+laboratory.bacterium_cultivator = appliances.appliance:new(
+    {
+      node_name_inactive = "hades_laboratory:bacterium_cultivator",
+      node_name_active = "hades_laboratory:bacterium_cultivator_active",
+      
+      node_description = S("Bacterium cultivator"),
+    	node_help = S("Connect to power 50 EU (LV)").."\n"..S("Cultivate bacteries in growth medium"),
+      
+      output_stack_size = 1,
+      use_stack_size = 0,
+      have_usage = false,
+      
+      power_data = {
+        ["LV"] = {
+            demand = 50,
+            run_speed = 1,
+          },
+        ["no_technic"] = {
+            run_speed = 1,
+          },
+      },
+    })
 
-bacterium_cultivator.recipes = {}
-
-function bacterium_cultivator.register_recipe(input, output)
-    bacterium_cultivator.recipes[input] = output
-end
+local bacterium_cultivator = laboratory.bacterium_cultivator;
 
 --------------
 -- Formspec --
 --------------
 
-local bacterium_cultivator_fs = "formspec_version[3]" .. "size[12.75,8.5]" ..
-                              "background[-1.25,-1.25;15,10;laboratory_machine_formspec.png]" ..
-                              "image[3.6,0.5;5.5,1.5;laboratory_progress_bar.png^[transformR270]]" ..
-                              "list[current_player;main;1.5,3;8,4;]" ..
-                              "list[context;input;2,0.75;1,1;]" ..
-                              "list[context;output;9.75,0.75;1,1;]" ..
-                              "listring[current_player;main]" ..
-                              "listring[context;input]" ..
-                              "listring[current_player;main]" ..
-                              "listring[context;output]" ..
-                              "listring[current_player;main]"
-
-local function get_active_bacterium_cultivator_fs(item_percent)
-    local form = {
-        "formspec_version[3]", "size[12.75,8.5]",
-        "background[-1.25,-1.25;15,10;laboratory_machine_formspec.png]",
-        "image[3.6,0.5;5.5,1.5;laboratory_progress_bar.png^[lowpart:" ..
-            (item_percent) ..
-            ":laboratory_progress_bar_full.png^[transformR270]]",
-        "list[current_player;main;1.5,3;8,4;]",
-        "list[context;input;2,0.75;1,1;]",
-        "list[context;output;9.75,0.75;1,1;]", "listring[current_player;main]",
-        "listring[context;input]", "listring[current_player;main]",
-        "listring[context;output]", "listring[current_player;main]"
-    }
-    return table.concat(form, "")
+function bacterium_cultivator:get_formspec(meta, production_percent, consumption_percent)
+  local progress = "image[3.6,0.9;5.5,0.95;appliances_production_progress_bar.png^[transformR270]]";
+  if production_percent then
+    progress = "image[3.6,0.9;5.5,0.95;appliances_production_progress_bar.png^[lowpart:" ..
+            (production_percent) ..
+            ":appliances_production_progress_bar_full.png^[transformR270]]";
+  end
+  
+  
+  
+  local formspec =  "formspec_version[3]" .. "size[12.75,8.5]" ..
+                    "background[-1.25,-1.25;15,10;appliances_appliance_formspec.png]" ..
+                    progress..
+                    "list[current_player;main;1.5,3;8,4;]" ..
+                    "list[context;"..self.input_stack..";2,0.8;1,1;]"..
+                    "list[context;"..self.output_stack..";9.75,0.8;1,1;]" ..
+                    "listring[current_player;main]" ..
+                    "listring[context;"..self.input_stack.."]" ..
+                    "listring[current_player;main]" ..
+                    "listring[context;"..self.output_stack.."]" ..
+                    "listring[current_player;main]";
+  return formspec;
 end
 
-local function update_formspec(progress, goal, meta)
-    local formspec
-
-    if progress > 0 and progress <= goal then
-        local item_percent = math.floor(progress / goal * 100)
-        formspec = get_active_bacterium_cultivator_fs(item_percent)
-    else
-        formspec = bacterium_cultivator_fs
-    end
-
-    meta:set_string("formspec", formspec)
-end
-
----------------
--- Cultivate --
----------------
-
-local function cultivate(pos)
-    local meta = minetest.get_meta(pos)
-    local inv = meta:get_inventory()
-    local input_item = inv:get_stack("input", 1)
-    local output_item = bacterium_cultivator.recipes[input_item:get_name()]
-    input_item:set_count(1)
-
-    if not bacterium_cultivator.recipes[input_item:get_name()] or
-        not inv:room_for_item("output", output_item) then
-        minetest.get_node_timer(pos):stop()
-        update_formspec(0, 3, meta)
-    else
-        inv:remove_item("input", input_item)
-        inv:add_item("output", output_item)
-    end
-end
+--------------------
+-- Node callbacks --
+--------------------
 
 ----------
 -- Node --
 ----------
 
-local def_desc = "Bacterium Cultivator";
-
-minetest.register_node("hades_laboratory:bacterium_cultivator", {
-    description = def_desc,
-    _tt_help = "Connect to power".."\n".."Cultivate bacteries in growth medium",
-    tiles = {
-        "laboratory_bacterium_cultivator_top.png",
-        "laboratory_bacterium_cultivator_bottom.png",
-        "laboratory_bacterium_cultivator_side.png",
-        "laboratory_bacterium_cultivator_side.png",
-        "laboratory_bacterium_cultivator_side.png",
-        "laboratory_bacterium_cultivator_front.png"
-    },
+local node_def = {
     paramtype2 = "facedir",
-    groups = {cracky = 2, tubedevice = 1, tubedevice_receiver = 1},
+    groups = {cracky = 2},
     legacy_facedir_simple = true,
     is_ground_content = false,
     sounds = hades_sounds.node_sound_stone_defaults(),
     drawtype = "node",
-    
-    -- mssecon action
-    mesecons = {
-      effector = {
-        action_on = function(pos, node)
-          minetest.get_meta(pos):set_int("is_powered", 1);
-        end,
-        action_off = function(pos, node)
-          minetest.get_meta(pos):set_int("is_powered", 0);
-        end,
-      },
+  }
+
+local node_inactive = {
+    tiles = {
+      "laboratory_bacterium_cultivator_top.png",
+      "laboratory_bacterium_cultivator_bottom.png",
+      "laboratory_bacterium_cultivator_side.png",
+      "laboratory_bacterium_cultivator_side.png",
+      "laboratory_bacterium_cultivator_side.png",
+      "laboratory_bacterium_cultivator_front.png"
     },
-    
-    can_dig = function(pos)
-        local meta = minetest.get_meta(pos)
-        local inv = meta:get_inventory()
-        return inv:is_empty("input") and inv:is_empty("output")
-    end,
+  }
 
-    on_timer = function(pos)
-        local meta = minetest.get_meta(pos)
-        local inv = meta:get_inventory()
-        local stack = meta:get_inventory():get_stack("input", 1)
-        if not bacterium_cultivator.recipes[stack:get_name()] then return false end
-        -- check if node is powered
-        local is_powered = minetest.get_meta(pos):get_int("is_powered");
-        if (is_powered==0) then
-          return true;
-        end
-      
-        local output_item = bacterium_cultivator.recipes[stack:get_name()]
-        local output_time = 180
-        local cultivating_time = meta:get_int("cultivating_time") or 0
-        cultivating_time = cultivating_time + 1
-        if cultivating_time % output_time == 0 then cultivate(pos) end
-        update_formspec(cultivating_time % output_time, output_time, meta)
-        meta:set_int("cultivating_time", cultivating_time)
-        if not inv:room_for_item("output", output_item) then return false end
+local node_active = {
+    tiles = {
+      "laboratory_bacterium_cultivator_top.png",
+      "laboratory_bacterium_cultivator_bottom.png",
+      "laboratory_bacterium_cultivator_side.png",
+      "laboratory_bacterium_cultivator_side.png",
+      "laboratory_bacterium_cultivator_side.png",
+      {
+        image = "laboratory_bacterium_cultivator_front_active.png",
+        backface_culling = true,
+        animation = {
+          type = "vertical_frames",
+          aspect_w = 16,
+          aspect_h = 16,
+          length = 1.5
+        }
+      }
+    },
+  }
 
-        if not stack:is_empty() then
-            return true
-        else
-            meta:set_int("cultivating_time", 0)
-            update_formspec(0, 3, meta)
-            return false
-        end
-    end,
-
-    allow_metadata_inventory_put = function(pos, listname, _, stack, player)
-        if minetest.is_protected(pos, player:get_player_name()) then
-            return 0
-        end
-        if listname == "input" then
-            return bacterium_cultivator.recipes[stack:get_name()] and
-                       stack:get_count() or 0
-        end
-        return 0
-    end,
-
-    allow_metadata_inventory_move = function() return 0 end,
-
-    allow_metadata_inventory_take = function(pos, _, _, stack, player)
-        if minetest.is_protected(pos, player:get_player_name()) then
-            return 0
-        end
-        return stack:get_count()
-    end,
-
-    on_metadata_inventory_put = function(pos)
-        local meta, timer = minetest.get_meta(pos), minetest.get_node_timer(pos)
-        local inv = meta:get_inventory()
-        local stack = inv:get_stack("input", 1)
-        local output_item = bacterium_cultivator.recipes[stack:get_name()]
-        local cultivating_time = meta:get_int("cultivating_time") or 0
-        if not bacterium_cultivator.recipes[stack:get_name()] then
-            timer:stop()
-            meta:set_string("formspec", bacterium_cultivator_fs)
-            return
-        end
-        if not inv:room_for_item("output", output_item) then
-            timer:stop()
-            return
-        else
-            if cultivating_time < 1 then update_formspec(0, 3, meta) end
-            timer:start(1)
-        end
-    end,
-
-    on_metadata_inventory_take = function(pos)
-        local meta, timer = minetest.get_meta(pos), minetest.get_node_timer(pos)
-        local inv = meta:get_inventory()
-        local stack = inv:get_stack("input", 1)
-        local cultivating_time = meta:get_int("cultivating_time") or 0
-        if not bacterium_cultivator.recipes[stack:get_name()] then
-            timer:stop()
-            meta:set_string("formspec", bacterium_cultivator_fs)
-            if cultivating_time > 0 then
-                meta:set_int("cultivating_time", 0)
-            end
-            return
-        end
-        timer:stop()
-        if cultivating_time < 1 then update_formspec(0, 3, meta) end
-        timer:start(1)
-    end,
-
-    on_construct = function(pos)
-        local meta = minetest.get_meta(pos)
-        meta:set_string("formspec", bacterium_cultivator_fs)
-        meta:set_string("infotext", def_desc)
-        local inv = meta:get_inventory()
-        inv:set_size("input", 1)
-        inv:set_size("output", 1)
-    end,
-    on_blast = function(pos)
-        local drops = {}
-        default.get_inventory_drops(pos, "input", drops)
-        default.get_inventory_drops(pos, "output", drops)
-        table.insert(drops, "hades_laboratory:bacterium_cultivator")
-        minetest.remove_node(pos)
-        return drops
-    end,
-    
-    after_place_node = function(pos)
-      pipeworks.scan_for_pipe_objects(pos);
-      if (not minetest.global_exists("mesecon")) then
-        minetest.get_meta(pos):set_int("is_powered", 1);
-      end
-    end,
-    after_dig_node = function(pos)
-      pipeworks.scan_for_pipe_objects(pos);
-    end,
-})
+bacterium_cultivator:register_nodes(node_def, node_inactive, node_active)
 
 -------------------------
 -- Recipe Registration --
 -------------------------
 
--- Plants --
+appliances.register_craft_type("laboratory_bacterium_cultivator", {
+    description = S("Cultivating"),
+    width = 1,
+    height = 1,
+  })
 
-if (laboratory.have_paleotest) then
-  bacterium_cultivator.register_recipe("hades_laboratory:growth_medium",
-                             "hades_laboratory:medium_with_bacteries");
+if laboratory.have_paleotest then
+
+  bacterium_cultivator:recipe_register_input(
+    "hades_laboratory:growth_medium",
+    {
+      inputs = 1,
+      outputs = {"hades_laboratory:medium_with_bacteries"},
+      production_time = 180,
+      consumption_step_size = 1,
+    });
   for i=2,5 do
-    bacterium_cultivator.register_recipe("hades_laboratory:growth_medium_use_"..i,
-                               "hades_laboratory:medium_with_bacteries_"..i);
+    bacterium_cultivator:recipe_register_input(
+      "hades_laboratory:growth_medium_use_"..i,
+      {
+        inputs = 1,
+        outputs = {"hades_laboratory:medium_with_bacteries_"..i},
+        production_time = 180,
+        consumption_step_size = 1,
+      });
   end
 end
 
+bacterium_cultivator:register_recipes("laboratory_bacterium_cultivator", "laboratory_bacterium_cultivator_use")
 

@@ -5,13 +5,15 @@
 -----------------------
 -- Initial Functions --
 -----------------------
+local S = laboratory.translator;
 
 laboratory.water_electrolysis = appliances.appliance:new(
     {
       node_name_inactive = "hades_laboratory:water_electrolysis",
       node_name_active = "hades_laboratory:water_electrolysis_active",
       
-      node_description = "Water Electrolysis",
+      node_description = S("Water Electrolysis"),
+      node_help = S("Connect to power 2000 EU (LV, MV, HV)").."\n"..S("Change water to oxygen and hydrogen..").."\n"..S("Fill gas cylinders.").."\n",
       
       need_water = false,
       power_data = {
@@ -82,7 +84,6 @@ end
 -- Node --
 ----------
 local node_def = {
-    _tt_help = "Connect to power".."\n".."Change water to oxygen and hydrogen..".."\n".."Fill gas cylinders.".."\n",
     paramtype2 = "facedir",
     groups = {cracky = 2,},
     legacy_facedir_simple = true,
@@ -125,6 +126,18 @@ water_electrolysis:register_nodes(node_def, inactive_node, active_node)
 -------------------------
 -- Recipe Registration --
 -------------------------
+
+appliances.register_craft_type("laboratory_water_electrolysis", {
+    description = S("Decomposing"),
+    width = 1,
+    height = 1,
+  })
+
+appliances.register_craft_type("laboratory_water_electrolysis_use", {
+    description = S("Use for decomposing"),
+    width = 1,
+    height = 1,
+  })
   
 water_electrolysis:recipe_register_usage(
   "hades_laboratory:steel_bottle_of_distilled_water",
@@ -143,5 +156,5 @@ water_electrolysis:recipe_register_input(
     consumption_step_size = 1,
   });
 
---minetest.log("warning", dump(water_electrolysis))
+water_electrolysis:register_recipes("laboratory_water_electrolysis", "laboratory_water_electrolysis_use")
 

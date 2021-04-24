@@ -3,6 +3,8 @@ laboratory = {};
 
 local modpath = minetest.get_modpath(minetest.get_current_modname());
 
+laboratory.translator = minetest.get_translator("laboratory");
+
 laboratory.have_paleotest = minetest.get_modpath("hades_paleotest")~=nil;
 laboratory.have_animals = minetest.get_modpath("hades_animals")~=nil;
 laboratory.have_petz = minetest.get_modpath("hades_petz")~=nil;
@@ -39,6 +41,8 @@ if (laboratory.have_paleotest) then
   dofile(modpath.."/bone_grinder.lua");
   dofile(modpath.."/deoxyribonucleic_cultivator.lua");
   dofile(modpath.."/deoxyribonucleic_merger.lua")
+  
+  dofile(modpath.."/bacterium_changer.lua");
 end
 
 if (laboratory.have_extraores) then

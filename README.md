@@ -1,10 +1,10 @@
-Minetest mod: hades_laboratory
-=======================
-Based on the mod "paleotest"
+Minetest mod: hades\_laboratory
+================================
+Written like an extension of paleotest mod for subgame hades\_revisited.
 
 License of source code:
 -----------------------
-GPL 3 or newer
+MIT
 
 Authors of source code:
 -----------------------
@@ -12,8 +12,8 @@ SFENCE
 
 License of media (textures, sounds and models):
 -----------------------------------------------
-CC-0
+CC BY-SA 4.0
 
 Authors of media files:
 -----------------------
-SFENCE, sinki
+SFENCE, sinki, imrija
