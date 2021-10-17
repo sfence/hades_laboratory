@@ -54,7 +54,7 @@ local function not_used()
   local formspec =  "formspec_version[3]" .. "size[12.75,8.5]" ..
                     "background[-1.25,-1.25;15,10;laboratory_machine_formspec.png]" ..
                     progress..
-                    "list[current_player;main;1.5,3;8,4;]" ..
+                    "list[current_player;main;0.3,3;10,4;]" ..
                     "list[context;input;2,0.25;1,1;]" ..
                     "list[context;water_in;2,1.5;1,1;]" ..
                     "list[context;output;9.75,0.25;2,1;]" ..

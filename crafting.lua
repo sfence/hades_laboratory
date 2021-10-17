@@ -305,3 +305,28 @@ if (laboratory.have_paleotest) then
       }
     );
 end
+if minetest.get_modpath("hades_technic") then
+  -- machines
+  minetest.register_craft(
+      {
+        output = "hades_laboratory:gas_cylinder",
+        recipe = {
+            {"hades_technic:stainless_steel_ingot"},
+            {"hades_technic:stainless_steel_ingot"},
+            {"hades_technic:stainless_steel_ingot"},
+          },
+      }
+    );
+else
+  -- machines
+  minetest.register_craft(
+      {
+        output = "hades_laboratory:gas_cylinder",
+        recipe = {
+            {"hades_core:steel_ingot"},
+            {"hades_core:steel_ingot"},
+            {"hades_core:steel_ingot"},
+          },
+      }
+    );
+end

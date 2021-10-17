@@ -57,7 +57,7 @@ function deoxyribonucleic_cultivator:get_formspec(meta, production_percent, cons
   local formspec =  "formspec_version[3]" .. "size[12.75,8.5]" ..
                     "background[-1.25,-1.25;15,10;appliances_appliance_formspec.png]" ..
                     progress..
-                    "list[current_player;main;1.5,3;8,4;]" ..
+                    "list[current_player;main;0.3,3;10,4;]" ..
                     "list[context;"..self.input_stack..";2,0.25;1,1;]" ..
                     "list[context;"..self.use_stack..";2,1.5;1,1;]" ..
                     "list[context;"..self.output_stack..";9.75,0.25;1,2;]" ..
@@ -103,7 +103,7 @@ local node_active = {
         "laboratory_deoxyribonucleic_cultivator_side.png",
         "laboratory_deoxyribonucleic_cultivator_side.png",
         {
-          image = "laboratory_deoxyribonucleic_cultivator_front.png",
+          image = "laboratory_deoxyribonucleic_cultivator_front_active.png",
           backface_culling = true,
           animation = {
             type = "vertical_frames",

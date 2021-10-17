@@ -50,7 +50,7 @@ function blade_sharpen:get_formspec(meta, production_percent, consumption_percen
   local formspec =  "formspec_version[3]" .. "size[12.75,8.5]" ..
                     "background[-1.25,-1.25;15,10;appliances_appliance_formspec.png]" ..
                     progress..
-                    "list[current_player;main;1.5,3;8,4;]" ..
+                    "list[current_player;main;0.3,3;10,4;]" ..
                     "list[context;"..self.input_stack..";2,0.8;1,1;]"..
                     "list[context;"..self.output_stack..";9.75,0.8;1,1;]" ..
                     "listring[current_player;main]" ..
