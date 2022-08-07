@@ -14,29 +14,42 @@ laboratory.water_electrolysis = appliances.appliance:new(
       
       node_description = S("Water Electrolysis"),
       node_help = S("Connect to power 2000 EU (LV, MV, HV)").."\n"..S("Change water to oxygen and hydrogen..").."\n"..S("Fill gas cylinders.").."\n",
-      
-      need_water = false,
-      power_data = {
-        ["LV"] = {
-            demand = 2000,
-            run_speed = 1,
-          },
-        ["MV"] = {
-            demand = 2000,
-            run_speed = 2,
-          },
-        ["HV"] = {
-            demand = 2000,
-            run_speed = 3,
-          },
-        ["no_technic"] = {
-            run_speed = 0.25,
-          },
-      },
     }
   );
 
 local water_electrolysis = laboratory.water_electrolysis;
+
+water_electrolysis:power_data_register(
+  {
+    ["LV_power"] = {
+        demand = 10000,
+        run_speed = 1,
+        disable = {"no_power"},
+      },
+    ["MV_power"] = {
+        demand = 10000,
+        run_speed = 2,
+        disable = {"no_power"},
+      },
+    ["HV_power"] = {
+        demand = 10000,
+        run_speed = 3,
+        disable = {"no_power"},
+      },
+    ["power_generators_power"] = {
+        demand = 150,
+        run_speed = 0.01,
+        disable = {"no_power"},
+      },
+    ["no_power"] = {
+        run_speed = 0,
+      },
+  })
+water_electrolysis:item_data_register(
+  {
+    ["tube_item"] = {
+      },
+  })
 
 --------------
 -- Formspec --

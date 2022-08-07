@@ -14,21 +14,32 @@ laboratory.bacterium_changer = appliances.appliance:new(
       
       node_description = S("Bacterium changer"),
       node_help = S("Connect to power 2000 EU (LV).").."\n"..S("Overwrite bacteriums DNA.").."\n"..S("Use bottle of bacteriums and upgraded DNA."),
-      
-      need_water = false,
-      power_data = {
-        ["LV"] = {
-            demand = 2000,
-            run_speed = 1,
-          },
-        ["no_technic"] = {
-            run_speed = 0.25,
-          },
-      },
     }
   );
 
 local bacterium_changer = laboratory.bacterium_changer;
+
+bacterium_changer:power_data_register(
+  {
+    ["LV_power"] = {
+        demand = 2000,
+        run_speed = 1,
+        disable = {"no_power"},
+      },
+    ["power_generators_power"] = {
+        demand = 2000,
+        run_speed = 1,
+        disable = {"no_power"},
+      },
+    ["no_power"] = {
+        run_speed = 0,
+      },
+  })
+bacterium_changer:item_data_register(
+  {
+    ["tube_item"] = {
+      },
+  })
 
 --------------
 -- Formspec --

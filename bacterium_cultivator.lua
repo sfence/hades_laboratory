@@ -18,19 +18,31 @@ laboratory.bacterium_cultivator = appliances.appliance:new(
       output_stack_size = 1,
       use_stack_size = 0,
       have_usage = false,
-      
-      power_data = {
-        ["LV"] = {
-            demand = 50,
-            run_speed = 1,
-          },
-        ["no_technic"] = {
-            run_speed = 1,
-          },
-      },
     })
 
 local bacterium_cultivator = laboratory.bacterium_cultivator;
+
+bacterium_cultivator:power_data_register(
+  {
+    ["LV_power"] = {
+        demand = 50,
+        run_speed = 1,
+        disable = {"no_power"},
+      },
+    ["power_generators_power"] = {
+        demand = 50,
+        run_speed = 1,
+        disable = {"no_power"},
+      },
+    ["no_power"] = {
+        run_speed = 0,
+      },
+  })
+bacterium_cultivator:item_data_register(
+  {
+    ["tube_item"] = {
+      },
+  })
 
 --------------
 -- Formspec --

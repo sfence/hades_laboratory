@@ -17,21 +17,36 @@ laboratory.blade_sharpen = appliances.appliance:new(
       
       output_stack_size = 1,
       have_usage = false,
-      
-      need_water = true,
-      
-      power_data = {
-        ["LV"] = {
-            demand = 200,
-            run_speed = 1,
-          },
-        ["no_technic"] = {
-            run_speed = 1,
-          },
-      },
     })
 
 local blade_sharpen = laboratory.blade_sharpen
+
+blade_sharpen:power_data_register(
+  {
+    ["LV_power"] = {
+        demand = 200,
+        run_speed = 1,
+        disable = {"no_power"},
+      },
+    ["power_generators_power"] = {
+        demand = 200,
+        run_speed = 1,
+        disable = {"no_power"},
+      },
+    ["no_power"] = {
+        run_speed = 0,
+      },
+  })
+blade_sharpen:supply_data_register(
+  {
+    ["water_pipe_liquid"] = {
+      },
+  })
+blade_sharpen:item_data_register(
+  {
+    ["tube_item"] = {
+      },
+  })
 
 --------------
 -- Formspec --

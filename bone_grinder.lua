@@ -16,21 +16,36 @@ laboratory.bone_grinder = appliances.appliance:new(
     	node_help = S("Connect to power 200 EU (LV) and water.").."\n"..S("Grind bones to small pieces.").."\n"..S("Use blades to grind known bones, to prepare them for cultivation."),
       
       output_stack_size = 2,
-      
-      need_water = true,
-      
-      power_data = {
-        ["LV"] = {
-            demand = 200,
-            run_speed = 1,
-          },
-        ["no_technic"] = {
-            run_speed = 1,
-          },
-      },
     })
 
 local bone_grinder = laboratory.bone_grinder
+
+bone_grinder:power_data_register(
+  {
+    ["LV_power"] = {
+        demand = 200,
+        run_speed = 1,
+        disable = {"no_power"},
+      },
+    ["power_generators_power"] = {
+        demand = 200,
+        run_speed = 1,
+        disable = {"no_power"},
+      },
+    ["no_power"] = {
+        run_speed = 0,
+      },
+  })
+bone_grinder:supply_data_register(
+  {
+    ["water_pipe_liquid"] = {
+      },
+  })
+bone_grinder:item_data_register(
+  {
+    ["tube_item"] = {
+      },
+  })
 
 --------------
 -- Formspec --

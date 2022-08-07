@@ -19,21 +19,36 @@ laboratory.deoxyribonucleic_cultivator = appliances.appliance:new(
       
       stoppable_production = false,
       stoppable_consumption = false,
-      
-      need_water = true,
-      
-      power_data = {
-        ["LV"] = {
-            demand = 100,
-            run_speed = 1,
-          },
-        ["no_technic"] = {
-            run_speed = 1,
-          },
-      },
     })
 
 local deoxyribonucleic_cultivator = laboratory.deoxyribonucleic_cultivator
+
+deoxyribonucleic_cultivator:power_data_register(
+  {
+    ["LV_power"] = {
+        demand = 100,
+        run_speed = 1,
+        disable = {"no_power"},
+      },
+    ["power_generators_power"] = {
+        demand = 100,
+        run_speed = 1,
+        disable = {"no_power"},
+      },
+    ["no_power"] = {
+        run_speed = 0,
+      },
+  })
+deoxyribonucleic_cultivator:supply_data_register(
+  {
+    ["water_pipe_liquid"] = {
+      },
+  })
+deoxyribonucleic_cultivator:item_data_register(
+  {
+    ["tube_item"] = {
+      },
+  })
 
 --------------
 -- Formspec --

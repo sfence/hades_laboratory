@@ -16,21 +16,36 @@ laboratory.biomaterial_filter = appliances.appliance:new(
     	node_help = S("Connect to power 100 EU (LV) and water.").."\n"..S("Keep only biomaterial in bottle.").."\n"..S("Use biomaterial filters."),
       
       output_stack_size = 2,
-			
-			need_water = true,
-      
-      power_data = {
-        ["LV"] = {
-            demand = 100,
-            run_speed = 1,
-          },
-        ["no_technic"] = {
-            run_speed = 1,
-          },
-      },
     })
 
 biomaterial_filter = laboratory.biomaterial_filter;
+
+biomaterial_filter:power_data_register(
+  {
+    ["LV_power"] = {
+        demand = 100,
+        run_speed = 1,
+        disable = {"no_power"},
+      },
+    ["power_generators_power"] = {
+        demand = 100,
+        run_speed = 1,
+        disable = {"no_power"},
+      },
+    ["no_power"] = {
+        run_speed = 0,
+      },
+  })
+biomaterial_filter:supply_data_register(
+  {
+    ["water_pipe_liquid"] = {
+      },
+  })
+biomaterial_filter:item_data_register(
+  {
+    ["tube_item"] = {
+      },
+  })
 
 --------------
 -- Formspec --

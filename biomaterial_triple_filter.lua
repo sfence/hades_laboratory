@@ -17,21 +17,38 @@ laboratory.biomaterial_triple_filter = appliances.appliance:new(
       
       input_stack_size = 2,
       use_stack_size = 1,
-			
-			need_water = true,
-
-      power_data = {
-        ["LV"] = {
-            demand = 200,
-            run_speed = 2,
-          },
-        ["no_technic"] = {
-            run_speed = 1,
-          },
-      },
+      
+      need_supply = true,
     })
 
 local biomaterial_triple_filter = laboratory.biomaterial_triple_filter;
+
+biomaterial_triple_filter:power_data_register(
+  {
+    ["LV_power"] = {
+        demand = 200,
+        run_speed = 1,
+        disable = {"no_power"},
+      },
+    ["power_generators_power"] = {
+        demand = 200,
+        run_speed = 1,
+        disable = {"no_power"},
+      },
+    ["no_power"] = {
+        run_speed = 0,
+      },
+  })
+biomaterial_triple_filter:supply_data_register(
+  {
+    ["water_pipe_liquid"] = {
+      },
+  })
+biomaterial_triple_filter:item_data_register(
+  {
+    ["tube_item"] = {
+      },
+  })
 
 --------------
 -- Formspec --

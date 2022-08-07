@@ -13,23 +13,35 @@ laboratory.deoxyribonucleic_merger = appliances.appliance:new(
       node_name_active = "hades_laboratory:deoxyribonucleic_merger_active",
       
       node_description = S("Deoxyribonucleic merger"),
-      node_help = S("Connect to power 1500 EU (LV)").."\n"..S("Calculate how to join DNA fragments together and do it.").."\n"..S("Use steel bottles of distilated water."),
+      node_help = S("Connect to power 3000 EU (LV)").."\n"..S("Calculate how to join DNA fragments together and do it.").."\n"..S("Use steel bottles of distilated water."),
       
       output_stack_size = 2,
-      
-      power_data = {
-        ["LV"] = {
-            demand = 3000,
-            run_speed = 1,
-          },
-        ["no_technic"] = {
-            run_speed = 1,
-          },
-      },
     })
 
 
 local deoxyribonucleic_merger = laboratory.deoxyribonucleic_merger
+
+deoxyribonucleic_merger:power_data_register(
+  {
+    ["LV_power"] = {
+        demand = 3000,
+        run_speed = 1,
+        disable = {"no_power"},
+      },
+    ["power_generators_power"] = {
+        demand = 3000,
+        run_speed = 1,
+        disable = {"no_power"},
+      },
+    ["no_power"] = {
+        run_speed = 0,
+      },
+  })
+deoxyribonucleic_merger:item_data_register(
+  {
+    ["tube_item"] = {
+      },
+  })
 
 --------------
 -- Formspec --

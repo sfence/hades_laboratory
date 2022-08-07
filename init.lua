@@ -7,6 +7,7 @@ laboratory.translator = minetest.get_translator("laboratory");
 
 laboratory.have_paleotest = minetest.get_modpath("hades_paleotest")~=nil;
 laboratory.have_animals = minetest.get_modpath("hades_animals")~=nil;
+laboratory.have_horse = minetest.get_modpath("hades_horse")~=nil;
 laboratory.have_petz = minetest.get_modpath("hades_petz")~=nil;
 laboratory.have_villages = minetest.get_modpath("hades_villages")~=nil;
 laboratory.have_skeleton = minetest.get_modpath("hades_skeleton")~=nil;

@@ -16,20 +16,31 @@ laboratory.polymerase_extractor = appliances.appliance:new(
     	node_help = S("Connect to power 200 EU (LV).").."\n"..S("Extract polymerase from bacteries and filter it for better result."),
       
       output_stack_size = 2,
-      
-      power_data = {
-        ["LV"] = {
-            demand = 200,
-            run_speed = 1,
-          },
-        ["no_technic"] = {
-            run_speed = 1,
-          },
-      },
     })
 
 local polymerase_extractor = laboratory.polymerase_extractor
 
+polymerase_extractor:power_data_register(
+  {
+    ["LV_power"] = {
+        demand = 200,
+        run_speed = 1,
+        disable = {"no_power"},
+      },
+    ["power_generators_power"] = {
+        demand = 200,
+        run_speed = 1,
+        disable = {"no_power"},
+      },
+    ["no_power"] = {
+        run_speed = 0,
+      },
+  })
+polymerase_extractor:item_data_register(
+  {
+    ["tube_item"] = {
+      },
+  })
 
 --------------
 -- Formspec --

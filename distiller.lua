@@ -16,21 +16,36 @@ laboratory.distiller = appliances.appliance:new(
     	node_help = S("Connect to power and water.").."\n"..S("Fill bottle with filtered and distilled water."),
       
       output_stack_size = 2,
-      
-      need_water = true,
-      
-      power_data = {
-        ["LV"] = {
-            demand = 500,
-            run_speed = 1,
-          },
-        ["no_technic"] = {
-            run_speed = 1,
-          },
-      },
     })
 
 local distiller = laboratory.distiller
+
+distiller:power_data_register(
+  {
+    ["LV_power"] = {
+        demand = 500,
+        run_speed = 1,
+        disable = {"no_power"},
+      },
+    ["power_generators_power"] = {
+        demand = 500,
+        run_speed = 1,
+        disable = {"no_power"},
+      },
+    ["no_power"] = {
+        run_speed = 0,
+      },
+  })
+distiller:supply_data_register(
+  {
+    ["water_pipe_liquid"] = {
+      },
+  })
+distiller:item_data_register(
+  {
+    ["tube_item"] = {
+      },
+  })
 
 --------------
 -- Formspec --

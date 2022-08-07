@@ -18,30 +18,37 @@ laboratory.dna_duplicator = appliances.appliance:new(
       output_stack_size = 2,
       
       stoppable_production = false,
-      
-      need_water = true,
-      
     })
 
 local dna_duplicator = laboratory.dna_duplicator
 
+
 dna_duplicator:power_data_register(
   {
-    ["LV"] = {
+    ["LV_power"] = {
         demand = 100,
         run_speed = 1,
-        disable = {"mesecon","time"},
+        disable = {"no_power"},
       },
-    ["mesecon"] = {
+    ["power_generators_power"] = {
+        demand = 100,
         run_speed = 1,
-        disable = {"LV","time"},
+        disable = {"no_power"},
       },
-    ["time"] = {
-        run_speed = 1,
-        disable = {"LV","mesecon"},
+    ["no_power"] = {
+        run_speed = 0,
       },
   })
-minetest.log("warning", dump(dna_duplicator.power_data));
+dna_duplicator:supply_data_register(
+  {
+    ["water_pipe_liquid"] = {
+      },
+  })
+dna_duplicator:item_data_register(
+  {
+    ["tube_item"] = {
+      },
+  })
 
 --------------
 -- Formspec --
@@ -202,6 +209,19 @@ if laboratory.have_animals then
   end
 end
 
+if laboratory.have_horse then
+  for key, name in pairs(paleotest.hades_horse) do
+    dna_duplicator:recipe_register_input(
+      "hades_paleotest:dna_"..key,
+      {
+        inputs = 1,
+        outputs = {"hades_paleotest:dna_"..key.." 2"},
+        production_time = 300,
+        consumption_step_size = 1,
+      });
+  end
+end
+
 if (laboratory.have_villages) then
   for key, name in pairs(paleotest.hades_villages) do
     dna_duplicator:recipe_register_input(
@@ -213,6 +233,17 @@ if (laboratory.have_villages) then
         consumption_step_size = 1,
       });
   end
+end
+
+for key, fauna in pairs(paleotest.hades_fauna) do
+  dna_duplicator:recipe_register_input(
+    "hades_paleotest:dna_"..key,
+    {
+      inputs = 1,
+      outputs = {"hades_paleotest:dna_"..key.." 2"},
+      production_time = 300,
+      consumption_step_size = 1,
+    });
 end
 
 dna_duplicator:register_recipes("laboratory_dna_duplicator", "laboratory_dna_duplicator_use")
