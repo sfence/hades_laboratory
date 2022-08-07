@@ -6,7 +6,7 @@ if (laboratory.have_paleotest) then
       {
         output = "hades_laboratory:sterilizer",
         recipe = {
-            {"hades_core:steel_ingot", "glowcrystals:glowcrystal_block", "hades_core:steel_ingot"},
+            {"hades_core:steel_ingot", "hades_glowcrystals:glowcrystal_block", "hades_core:steel_ingot"},
             {"hades_core:gold_ingot", "pipeworks:valve_off_empty", "hades_core:gold_ingot"},
             {"hades_core:steel_ingot", "hades_furniture:sink", "hades_core:steel_ingot"},
           },
@@ -37,7 +37,7 @@ if (laboratory.have_paleotest) then
       {
         output = "hades_laboratory:bacterium_cultivator",
         recipe = {
-            {"hades_core:steel_ingot", "glowcrystals:glowglass", "hades_core:steel_ingot"},
+            {"hades_core:steel_ingot", "hades_glowcrystals:glowglass", "hades_core:steel_ingot"},
             {"hades_core:goldblock", "pipeworks:valve_off_empty", "hades_core:goldblock"},
             {"hades_core:steel_ingot", "pipeworks:storage_tank_0", "hades_core:steel_ingot"},
           },
@@ -131,14 +131,14 @@ if (laboratory.have_paleotest) then
   minetest.register_craft(
       {
         type = "shapeless",
-        output = "vessels:glass_bottle",
+        output = "hades_vessels:glass_bottle",
         recipe = {"hades_laboratory:sterilized_glass_bottle"},
       }
     );
   minetest.register_craft(
       {
         type = "shapeless",
-        output = "vessels:steel_bottle",
+        output = "hades_vessels:steel_bottle",
         recipe = {"hades_laboratory:sterilized_steel_bottle"},
       }
     );
@@ -204,12 +204,12 @@ if (laboratory.have_paleotest) then
             {"", "hades_laboratory:sterilized_glass_bottle", ""},
           },
         replacements = {
-          {"hades_laboratory:bottle_of_some_bacteries","vessels:glass_bottle"},
-          {"hades_laboratory:bottle_of_some_bacteries","vessels:glass_bottle"},
-          {"hades_laboratory:bottle_of_some_bacteries","vessels:glass_bottle"},
-          {"hades_laboratory:bottle_of_some_bacteries","vessels:glass_bottle"},
-          {"hades_laboratory:bottle_of_some_bacteries","vessels:glass_bottle"},
-          {"hades_laboratory:bottle_of_some_bacteries","vessels:glass_bottle"},
+          {"hades_laboratory:bottle_of_some_bacteries","hades_vessels:glass_bottle"},
+          {"hades_laboratory:bottle_of_some_bacteries","hades_vessels:glass_bottle"},
+          {"hades_laboratory:bottle_of_some_bacteries","hades_vessels:glass_bottle"},
+          {"hades_laboratory:bottle_of_some_bacteries","hades_vessels:glass_bottle"},
+          {"hades_laboratory:bottle_of_some_bacteries","hades_vessels:glass_bottle"},
+          {"hades_laboratory:bottle_of_some_bacteries","hades_vessels:glass_bottle"},
                       },
       }
     );
@@ -223,12 +223,12 @@ if (laboratory.have_paleotest) then
             {"", "hades_laboratory:sterilized_glass_bottle", ""},
           },
         replacements = {
-          {"hades_laboratory:glass_bottle_of_some_polymerase","vessels:glass_bottle"},
-          {"hades_laboratory:glass_bottle_of_some_polymerase","vessels:glass_bottle"},
-          {"hades_laboratory:glass_bottle_of_some_polymerase","vessels:glass_bottle"},
-          {"hades_laboratory:glass_bottle_of_some_polymerase","vessels:glass_bottle"},
-          {"hades_laboratory:glass_bottle_of_some_polymerase","vessels:glass_bottle"},
-          {"hades_laboratory:glass_bottle_of_some_polymerase","vessels:glass_bottle"},
+          {"hades_laboratory:glass_bottle_of_some_polymerase","hades_vessels:glass_bottle"},
+          {"hades_laboratory:glass_bottle_of_some_polymerase","hades_vessels:glass_bottle"},
+          {"hades_laboratory:glass_bottle_of_some_polymerase","hades_vessels:glass_bottle"},
+          {"hades_laboratory:glass_bottle_of_some_polymerase","hades_vessels:glass_bottle"},
+          {"hades_laboratory:glass_bottle_of_some_polymerase","hades_vessels:glass_bottle"},
+          {"hades_laboratory:glass_bottle_of_some_polymerase","hades_vessels:glass_bottle"},
                        },
       }
     );
@@ -240,7 +240,7 @@ if (laboratory.have_paleotest) then
             {"hades_laboratory:glass_bottle_of_polymerase", "hades_laboratory:glass_bottle_of_polymerase", "hades_laboratory:glass_bottle_of_polymerase"},
             {"", "hades_laboratory:sterilized_steel_bottle", ""},
           },
-        replacements = {{"hades_laboratory:glass_bottle_of_polymerase","vessels:glass_bottle"}},
+        replacements = {{"hades_laboratory:glass_bottle_of_polymerase","hades_vessels:glass_bottle"}},
       }
     );
   

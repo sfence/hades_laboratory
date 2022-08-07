@@ -186,7 +186,7 @@ if laboratory.have_paleotest then
     "",
     {
     	inputs = {"hades_laboratory:medium_with_bacteries_5", "hades_laboratory:sterilized_glass_bottle"},
-      outputs = {{"hades_laboratory:bottle_of_some_bacteries", "vessels:glass_bottle"}},
+      outputs = {{"hades_laboratory:bottle_of_some_bacteries", "hades_vessels:glass_bottle"}},
       production_time = output_time,
       consumption_step_size = 90/(output_time/5),
     });

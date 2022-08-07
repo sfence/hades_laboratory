@@ -144,14 +144,14 @@ appliances.register_craft_type("laboratory_deoxyribonucleic_merger_use", {
 deoxyribonucleic_merger:recipe_register_usage(
   "hades_laboratory:steel_bottle_of_distilled_water",
   {
-    outputs = {"vessels:steel_bottle"},
+    outputs = {"hades_vessels:steel_bottle"},
     consumption_time = 10,
     production_step_size = 1,
   });
 deoxyribonucleic_merger:recipe_register_usage(
   "hades_laboratory:steel_bottle_of_polymerase",
   {
-    outputs = {"vessels:steel_bottle"},
+    outputs = {"hades_vessels:steel_bottle"},
     consumption_time = 60,
     production_step_size = 10,
   });

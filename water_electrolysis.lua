@@ -155,7 +155,7 @@ appliances.register_craft_type("laboratory_water_electrolysis_use", {
 water_electrolysis:recipe_register_usage(
   "hades_laboratory:steel_bottle_of_distilled_water",
   {
-    outputs = {"vessels:steel_bottle"},
+    outputs = {"hades_vessels:steel_bottle"},
     consumption_time = 3300,
     production_step_size = 1,
   });

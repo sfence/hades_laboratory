@@ -151,14 +151,14 @@ appliances.register_craft_type("laboratory_dna_duplicator_use", {
 dna_duplicator:recipe_register_usage(
   "hades_laboratory:glass_bottle_of_polymerase",
   {
-    outputs = {"vessels:glass_bottle"},
+    outputs = {"hades_vessels:glass_bottle"},
     consumption_time = 150,
     production_step_size = 1,
   });
 dna_duplicator:recipe_register_usage(
   "hades_laboratory:steel_bottle_of_polymerase",
   {
-    outputs = {"vessels:steel_bottle"},
+    outputs = {"hades_vessels:steel_bottle"},
     consumption_time = 150*7, -- more efective then glass bottle of polymerases
     production_step_size = 1,
   });

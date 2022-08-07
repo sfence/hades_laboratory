@@ -135,7 +135,7 @@ appliances.register_craft_type("laboratory_sterilizer", {
 
 if (laboratory.have_paleotest) then
   sterilizer:recipe_register_input(
-    "vessels:glass_bottle",
+    "hades_vessels:glass_bottle",
     {
       inputs = 1,
       outputs = {"hades_laboratory:sterilized_glass_bottle"},
@@ -144,7 +144,7 @@ if (laboratory.have_paleotest) then
     });
   
   sterilizer:recipe_register_input(
-    "vessels:steel_bottle",
+    "hades_vessels:steel_bottle",
     {
       inputs = 1,
       outputs = {"hades_laboratory:sterilized_steel_bottle"},
