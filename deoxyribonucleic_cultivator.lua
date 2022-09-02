@@ -200,28 +200,14 @@ if laboratory.have_paleotest then
     table.insert(dust_bones_dinosaur_outputs, "hades_laboratory:dna_fragments_"..key.." 4");
   end
   
-  if laboratory.have_animals then
-    for key, name in pairs(paleotest.hades_animals) do
-      table.insert(crushed_bones_recent_outputs, "hades_laboratory:dna_fragments_"..key);
-      table.insert(crushed_bones_recent_outputs, "hades_laboratory:dna_fragments_"..key);
-      table.insert(crushed_bones_recent_outputs, "hades_laboratory:dna_fragments_"..key.." 2");
-      
-      table.insert(dust_bones_recent_outputs, "hades_laboratory:dna_fragments_"..key.." 2");
-      table.insert(dust_bones_recent_outputs, "hades_laboratory:dna_fragments_"..key.." 3");
-      table.insert(dust_bones_recent_outputs, "hades_laboratory:dna_fragments_"..key.." 4");
-    end
-  end
-  
-  if (laboratory.have_villages) then
-    for key, name in pairs(paleotest.hades_villages) do
-      table.insert(crushed_bones_recent_outputs, "hades_laboratory:dna_fragments_"..key);
-      table.insert(crushed_bones_recent_outputs, "hades_laboratory:dna_fragments_"..key);
-      table.insert(crushed_bones_recent_outputs, "hades_laboratory:dna_fragments_"..key.." 2");
-      
-      table.insert(dust_bones_recent_outputs, "hades_laboratory:dna_fragments_"..key.." 2");
-      table.insert(dust_bones_recent_outputs, "hades_laboratory:dna_fragments_"..key.." 3");
-      table.insert(dust_bones_recent_outputs, "hades_laboratory:dna_fragments_"..key.." 4");
-    end
+  for key, name in pairs(paleotest.hades_recent_fauna) do
+    table.insert(crushed_bones_recent_outputs, "hades_laboratory:dna_fragments_"..key);
+    table.insert(crushed_bones_recent_outputs, "hades_laboratory:dna_fragments_"..key);
+    table.insert(crushed_bones_recent_outputs, "hades_laboratory:dna_fragments_"..key.." 2");
+    
+    table.insert(dust_bones_recent_outputs, "hades_laboratory:dna_fragments_"..key.." 2");
+    table.insert(dust_bones_recent_outputs, "hades_laboratory:dna_fragments_"..key.." 3");
+    table.insert(dust_bones_recent_outputs, "hades_laboratory:dna_fragments_"..key.." 4");
   end
   
   deoxyribonucleic_cultivator:recipe_register_input(

@@ -411,32 +411,16 @@ if (laboratory.have_paleotest) then
     end
   end
   
-  if laboratory.have_animals then
-    for key, name in pairs(paleotest.hades_animals) do
-      minetest.register_craftitem(
-          "hades_laboratory:dna_fragments_"..key,
-          {
-            description = name.." DNA fragments",
-            inventory_image = "laboratory_dna_fragments.png",
-            wield_image = "laboratory_dna_fragments.png",
-            groups = {}
-          }
-        );
-    end
-  end
-  
-  if (laboratory.have_villages) then
-    for key, name in pairs(paleotest.hades_villages) do
-      minetest.register_craftitem(
-          "hades_laboratory:dna_fragments_"..key,
-          {
-            description = name.." DNA fragments",
-            inventory_image = "laboratory_dna_fragments.png",
-            wield_image = "laboratory_dna_fragments.png",
-            groups = {}
-          }
-        );
-    end
+  for key, fauna in pairs(paleotest.hades_recent_fauna) do
+    minetest.register_craftitem(
+        "hades_laboratory:dna_fragments_"..key,
+        {
+          description = fauna.desc.." DNA fragments",
+          inventory_image = "laboratory_dna_fragments.png",
+          wield_image = "laboratory_dna_fragments.png",
+          groups = {}
+        }
+      );
   end
 end
 

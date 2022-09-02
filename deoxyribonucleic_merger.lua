@@ -189,30 +189,15 @@ if laboratory.have_paleotest then
       });
   end
   
-  if laboratory.have_animals then
-    for key, name in pairs(paleotest.hades_animals) do
-      deoxyribonucleic_merger:recipe_register_input(
-        "hades_laboratory:dna_fragments_"..key,
-        {
-          inputs = 9,
-          outputs = {"hades_paleotest:dna_part_"..key},
-          production_time = 3600,
-          consumption_step_size = 1,
-        });
-    end
-  end
-  
-  if (laboratory.have_villages) then
-    for key, name in pairs(paleotest.hades_villages) do
-      deoxyribonucleic_merger:recipe_register_input(
-        "hades_laboratory:dna_fragments_"..key,
-        {
-          inputs = 9,
-          outputs = {"hades_paleotest:dna_part_"..key},
-          production_time = 3600,
-          consumption_step_size = 1,
-        });
-    end
+  for key, name in pairs(paleotest.hades_recent_fauna) do
+    deoxyribonucleic_merger:recipe_register_input(
+      "hades_laboratory:dna_fragments_"..key,
+      {
+        inputs = 9,
+        outputs = {"hades_paleotest:dna_part_"..key},
+        production_time = 3600,
+        consumption_step_size = 1,
+      });
   end
 end
 
