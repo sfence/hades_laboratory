@@ -36,7 +36,7 @@ water_electrolysis:power_data_register(
         run_speed = 3,
         disable = {"no_power"},
       },
-    ["power_generators_power"] = {
+    ["power_generators_electric_power"] = {
         demand = 150,
         run_speed = 0.01,
         disable = {"no_power"},

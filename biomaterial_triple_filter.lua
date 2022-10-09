@@ -30,7 +30,7 @@ biomaterial_triple_filter:power_data_register(
         run_speed = 1,
         disable = {"no_power"},
       },
-    ["power_generators_power"] = {
+    ["power_generators_electric_power"] = {
         demand = 200,
         run_speed = 1,
         disable = {"no_power"},
