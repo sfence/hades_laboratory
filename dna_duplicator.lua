@@ -196,8 +196,7 @@ if laboratory.have_paleotest then
   end
 end
 
-for key, fauna in pairs(paleotest.hades_recent_fauna) do
-end
+-- TODO: change recipe registratio logic
 
 dna_duplicator:register_recipes("laboratory_dna_duplicator", "laboratory_dna_duplicator_use")
 

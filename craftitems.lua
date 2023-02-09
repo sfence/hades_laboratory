@@ -375,6 +375,7 @@ if (laboratory.have_paleotest) then
       }
     );
   
+  --[[
   if laboratory.have_paleotest then
     for key, name in pairs(paleotest.dinosaurs) do
       minetest.register_craftitem(
@@ -422,5 +423,6 @@ if (laboratory.have_paleotest) then
         }
       );
   end
+  --]]
 end
 

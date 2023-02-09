@@ -171,6 +171,7 @@ local dust_bones_dinosaur_outputs = {};
 local dust_bones_iceage_outputs = {};
 local dust_bones_recent_outputs = {};
 
+--[[
 if laboratory.have_paleotest then
   for key, name in pairs(paleotest.dinosaurs) do
     table.insert(crushed_bones_dinosaur_outputs, "hades_laboratory:dna_fragments_"..key);
@@ -260,6 +261,7 @@ if laboratory.have_paleotest then
       consumption_step_size = 1,
     });
 end
+--]]
 
 deoxyribonucleic_cultivator:register_recipes("laboratory_deoxyribonucleic_cultivator", "laboratory_deoxyribonucleic_cultivator_use")
 

@@ -156,7 +156,7 @@ deoxyribonucleic_merger:recipe_register_usage(
     production_step_size = 10,
   });
 
-
+--[[
 if laboratory.have_paleotest then
   for key, name in pairs(paleotest.dinosaurs) do
     deoxyribonucleic_merger:recipe_register_input(
@@ -200,6 +200,7 @@ if laboratory.have_paleotest then
       });
   end
 end
+--]]
 
 deoxyribonucleic_merger:register_recipes("laboratory_deoxyribonucleic_merger", "laboratory_deoxyribonucleic_merger_use")
 
